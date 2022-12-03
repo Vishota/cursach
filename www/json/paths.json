@@ -2,11 +2,11 @@
     "root": "/",
     "json": {
         "about": "/json/about.json",
-        "langs": "/json/langs/",
-        "routes": "/json/routes.json",
+        "langs": "/json/langs/",    
         "lang_default": "/json/langs/en.json"
     },
     "html": {
-        "header": "/html/header.html"
+        "header": "/html/header.html",
+        "not_found": "/html/404.html"
     }
 }

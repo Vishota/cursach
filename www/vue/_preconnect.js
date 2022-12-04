@@ -45,3 +45,9 @@ export function getLang() {
     if (getCookie('lang') !== null) return getCookie('lang');
     return navigator.language;
 }
+export async function loadLang(langs, lang_default) {
+    return await loadAsJson(langs + getLang() + '.json')
+        .catch(rejected=>{
+            return loadAsJson(lang_default)
+        });
+}

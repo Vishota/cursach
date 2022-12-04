@@ -5,7 +5,7 @@
         "langs": "/json/langs/",    
         "lang_default": "/json/langs/en.json"
     },
-    "html": {
+    "components": {
         "header": "/html/header.html",
         "not_found": "/html/404.html"
     }

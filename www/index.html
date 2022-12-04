@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="/css/themes/default.css">
+        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="stylesheet" href="/css/sizes.css">
+
         <script src="https://unpkg.com/vue@3"></script>
 
         <script src="/vue/_connect.js" type="module"></script>
     </head>
     <body>
         <div id="app">
-            <div v-html="parts.header"></div>
+            <header-component></header-component>
+            <main>
+                
+            </main>
+            <a @click="a">test</a>
+            <div id="test"></div>
         </div>
     </body>
 </html>

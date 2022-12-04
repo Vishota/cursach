@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed&display=swap');
+
+body {
+    margin: 0px;
+    background-color: var(--c-back);
+    font-family: 'Fira Sans Condensed', sans-serif;
+    color: var(--c-text);
+    user-select: none;
+}
+
+main {
+    box-sizing: border-box;
+    width: 100vw;
+    padding: calc(var(--s-header) + var(--s-medium)) var(--s-page-side-paddings) var(--s-medium);
+}

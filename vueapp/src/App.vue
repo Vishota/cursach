@@ -1,26 +1,16 @@
 <script setup>
-import { reactive } from 'vue';
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-import * as f from './assets/js/f.js'
-
-const paths = await f.loadAsJson('./src/assets/json/paths.json').then(res => { console.log(res) });
-
-const globalDataLoading = [
-  f.loadAsJson('./src/assets/json/about.json').then(res => { console.log(res) })
-];
-
-//var about = await f.loadAsJson(paths.json.about);
-//var lang = await f.loadLang(paths.json.langs, paths.json.lang_default);
-
-const data = reactive({  })
+  import { reactive, defineComponent } from 'vue';
+  import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
   <header>
-    <RouterLink to="/" class="sitename">{{''}}</RouterLink>
+    <RouterLink to="/" class="sitename">{{about.sitename}}</RouterLink>
+    <menu>
+      <a>{{lang.signin}}</a>
+      <a>{{lang.signup}}</a>
+    </menu>
   </header>
-
   <RouterView />
 </template>
 
@@ -45,6 +35,7 @@ const data = reactive({  })
     font-size: calc((var(--s-header) - 2 * var(--s-small)) * var(--sitename-size-coef));
     margin-top: var(--sitename-y);
     cursor: pointer;
+    text-decoration: none;
   }
   menu {
     margin: 0;

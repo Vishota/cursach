@@ -1,6 +1,7 @@
 body {
-    --c-back: #dfd;
-    --c-back-blocks: #bbf;
-    --c-accent: #36f;
-    --c-text: #112;
+    --c-back: #333;
+    --c-back-blocks: #222;
+    --c-accent: #fc0;
+    --c-text: #ffe;
+    --c-text-pale: #ffe8;
 }

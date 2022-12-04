@@ -1,12 +1,8 @@
 {
     "root": "/",
     "json": {
-        "about": "/json/about.json",
-        "langs": "/json/langs/",    
-        "lang_default": "/json/langs/en.json"
-    },
-    "components": {
-        "header": "/html/header.html",
-        "not_found": "/html/404.html"
+        "about": "/src/assets/json/about.json",
+        "langs": "/src/assets/json/langs/",    
+        "lang_default": "/src/assets/json/langs/en.json"
     }
 }

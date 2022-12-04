@@ -1,15 +1,17 @@
 <script setup>
     import {defineProps} from 'vue'
-    defineProps(['pic', 'title', 'description', 'price', 'date'])
+    defineProps(['pic', 'title', 'description', 'price', 'date', 'id'])
 </script>
 <template>
-    <div class="announcement">
-        <img class="pic" :src="$props.pic">
-        <h2 class="title">{{$props.title}}</h2>
-        <p class="description">{{$props.description}}</p>
-        <p class="price">{{$props.price}}</p>
-        <p class="date">{{$props.date}}</p>
-    </div>
+    <RouterLink :to="('/announcements/'+id)">
+        <div class="announcement">
+            <img class="pic" :src="$props.pic">
+            <h2 class="title">{{$props.title}}</h2>
+            <p class="description">{{$props.description}}</p>
+            <p class="price">{{$props.price}}</p>
+            <p class="date">{{$props.date}}</p>
+        </div>
+    </RouterLink>
 </template>
 <style scoped>
     .announcement {

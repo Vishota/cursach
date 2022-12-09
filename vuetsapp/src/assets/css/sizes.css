@@ -9,7 +9,7 @@
 /*
     wide (2k+)
 */
-@media (min-width: 1500px) {
+@media (min-width: 2000px) {
     :root {
         --s-page: min(1400px, calc(100vw - 2 * var(--s-base-indent)));
     }
@@ -17,7 +17,7 @@
 /*
     medium (>720p && <2k)
 */
-@media (max-width: 1499px) and (min-width: 720px) {
+@media (max-width: 1999px) and (min-width: 720px) {
     :root {
         --s-page: min(1000px, calc(100vw - 2 * var(--s-base-indent)));
     }

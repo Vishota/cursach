@@ -1,0 +1,29 @@
+/*
+    common
+*/
+:root {
+    --s-page: calc(100vw - 2 * var(--s-base-indent));
+    --s-base-indent: 10px;
+    --s-page-indent: calc((100vw - var(--s-page)) / 2);
+}   
+/*
+    wide (2k+)
+*/
+@media (min-width: 1500px) {
+    :root {
+        --s-page: min(1400px, calc(100vw - 2 * var(--s-base-indent)));
+    }
+}
+/*
+    medium (>720p && <2k)
+*/
+@media (max-width: 1499px) and (min-width: 720px) {
+    :root {
+        --s-page: min(1000px, calc(100vw - 2 * var(--s-base-indent)));
+    }
+}
+/*
+    narrow (720p and less)
+*/
+@media (max-width: 719px) {
+}

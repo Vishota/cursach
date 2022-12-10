@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Lang from '../assets/modules/Lang'
+import Lang from '../assets/modules/Lang/Lang'
 
 new Lang()
 

@@ -1,7 +1,12 @@
+<script setup lang="ts">
+    import Lang from '@/assets/modules/Lang/Lang';
+    var lang : Lang = Lang.instance;
+</script>
 <template>
     <div class="pagewidth pagepadding"></div>
     <header class="pagewidth pagepadding">
-        <RouterLink to="/" class="sitename">HEADER</RouterLink>
+        <RouterLink to="/" class="sitename">CURSACH</RouterLink>
+        <a>{{lang.get().login}}</a>
     </header>
 </template>
 <style scoped>

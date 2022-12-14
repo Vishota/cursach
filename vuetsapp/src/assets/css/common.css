@@ -35,3 +35,14 @@ a { color: unset; text-decoration: unset; }
 .hoveraccent:hover {
     color: var(--c-accent);
 }
+.pointer {
+    cursor: pointer;
+}
+
+.spacebetween {
+    display: flex;
+    justify-content: space-between;
+}
+.block {
+    background-color: var(--c-block);
+}

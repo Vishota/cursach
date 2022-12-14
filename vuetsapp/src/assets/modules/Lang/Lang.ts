@@ -1,29 +1,22 @@
-export default
-    class Lang {
-        private static _instance: Lang = new Lang();
-        private _lang: object = {};
+import SingletonDuplicationError from "../Errors/SingletonDuplicationError";
 
-        public static get instance(): Lang {
-            return this._instance;
-        }
-
-        static getChosenLangName() : string {
-            return 'ru';// later
-        }
-        static choose(langname : string) : void {
-            // later
-        }
-
-        load(lang: string) : void {
-            this._lang = {
-                login: 'Войти'
-            }
-        }
-        get(): object {
-            return this._lang;
-        }
-        
-        constructor() {
-            this.load(Lang.getChosenLangName());
+class Lang {
+    private static _instance : Lang;
+    public static get instance() {
+        if(this._instance === undefined)
+            this._instance = new Lang();
+        return this._instance;
+    }
+    private constructor() {
+        if(Lang._instance !== undefined)
+            throw new SingletonDuplicationError('"Lang" duplication')
+    }
+    get():any {
+        return {
+            signin: "Войти",
+            signup: "Зарегистрироваться"
         }
     }
+}
+
+export default Lang.instance;

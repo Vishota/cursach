@@ -1,12 +1,11 @@
 <script setup lang="ts">
-    import Lang from '@/assets/modules/Lang/Lang';
-    var lang : Lang = Lang.instance;
+    import HeaderMenu from './HeaderMenu.vue';
 </script>
 <template>
     <div class="pagewidth pagepadding"></div>
-    <header class="pagewidth pagepadding">
+    <header class="pagewidth pagepadding spacebetween">
         <RouterLink to="/" class="sitename">CURSACH</RouterLink>
-        <a>{{lang.get().login}}</a>
+        <HeaderMenu />
     </header>
 </template>
 <style scoped>

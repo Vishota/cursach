@@ -17,12 +17,23 @@
     }
 </script>
 <template>
-    <img @mousemove="updateShownImage" v-show="i == shown" v-for="pic, i in pics" :src="pics.at(i)">
+    <div>
+        <img @mousemove="updateShownImage" v-show="i == shown" v-for="pic, i in pics" :src="pics.at(i)">
+    </div>
 </template>
 <style scoped>
     img {
         height: 100%;
         width: 100%;
         object-fit: cover;
+        border-radius: inherit;
+    }
+    div {
+        width: 100%;
+        height: 100%;
+        border: 1px solid var(--c-back);
+    }
+    div:hover {
+        border: 1px solid var(--c-accent);
     }
 </style>

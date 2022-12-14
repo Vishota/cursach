@@ -1,23 +1,26 @@
+import SingletonDuplicationError from "../Errors/SingletonDuplicationError";
 import User from "./User";
-import UsersApi from "./UsersApi";
 
-export default
 class UsersModule {
-    private static _instance : UsersModule = new UsersModule();
-    public static get instance() : UsersModule {
-        return this._instance;
+    private static _instance : UsersModule;
+    public static get instance() {
+        if (!UsersModule._instance) {
+            UsersModule._instance = new UsersModule();
+        }
+        return UsersModule._instance;
+    }
+    private constructor() {
+        if(UsersModule._instance !== undefined)
+            throw new SingletonDuplicationError('"UsersModule" duplication')
     }
 
-    constructor() {
-        this._users = new Map();
-        this._api = UsersApi.instance;
-    }
-
-    private _users: Map<number, User>;
-    private _api: UsersApi;
-
-    get(id : number): User {
-        if(!this._users.has(id)) this._users.set(id, new User(id, this._api));
-        return this._users.get(id) as User;
+    private _cached : Map<number, User> = new Map;
+    public get(id : number) : User {
+        if(!this._cached.has(id)) {
+            this._cached.set(id, new User(id));
+        }
+        return this._cached.get(id) as User;
     }
 }
+
+export default UsersModule.instance;

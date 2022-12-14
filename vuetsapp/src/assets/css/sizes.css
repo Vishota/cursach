@@ -5,25 +5,40 @@
     --s-page: calc(100vw - 2 * var(--s-base-indent));
     --s-base-indent: 10px;
     --s-page-indent: calc((100vw - var(--s-page)) / 2);
+    --s-border-radius: 5px;
+    --n-hor-announcements: 4;
 }   
 /*
     wide (2k+)
 */
-@media (min-width: 2000px) {
+@media (min-width: 1400px) {
     :root {
         --s-page: min(1400px, calc(100vw - 2 * var(--s-base-indent)));
+        --n-hor-announcements: 6;
     }
 }
 /*
     medium (>720p && <2k)
 */
-@media (max-width: 1999px) and (min-width: 720px) {
+@media (max-width: 1399px) and (min-width: 720px) {
     :root {
         --s-page: min(1000px, calc(100vw - 2 * var(--s-base-indent)));
+        --n-hor-announcements: 4;
     }
 }
 /*
     narrow (720p and less)
 */
-@media (max-width: 719px) {
+@media (min-width: 400px) and (max-width: 719px) {
+    :root {
+        --n-hor-announcements: 2;
+    }
+}
+/*
+    mobile
+*/
+@media (max-width: 399px) {
+    :root {
+        --n-hor-announcements: 1;
+    }
 }

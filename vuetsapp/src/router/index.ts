@@ -1,7 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Lang from '../assets/modules/Lang/Lang'
-
-new Lang()
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

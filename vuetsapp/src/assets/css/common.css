@@ -30,6 +30,11 @@ h1,h2,h3,h4,h5,h6,p {
 *::-webkit-scrollbar-thumb:active {
     background-color: var(--c-accent);
 }
+*::selection {
+    background-color: var(--c-accent);
+    color: var(--c-back);
+}
+
 #app {
     height: 100vh;
 }

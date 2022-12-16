@@ -20,18 +20,21 @@ class AnnouncementsApi {
     async getDescription(id : number) : Promise<string> {
         return 'description ' + id + 'dslg.njasdl asiluh iuarsfiosarjo текст какой-то блин ааыа текст какой-то блин ааыа текст какой-то блин ааыа текст какой-то блин ааыа';
     }
-    async getPics(_id: number) : Promise<Array<string>> {
+    async getPics(id: number) : Promise<Array<string>> {
         return ['https://pbs.twimg.com/media/D678wMfW0AAs733.jpg', 'https://avatars.mds.yandex.net/i?id=e8d5cfaeaa947002571cfe7a50e1930a016a7682-8244056-images-thumbs&n=13&exp=1']
     }
-    async getPrice(_id: number) : Promise<string> {
+    async getPrice(id: number) : Promise<string> {
         return '10$';
     }
-    async getFeatures(_id: number) {
+    async getFeatures(id: number) {
         return [
             { name: 'somefeature', value: '10' },
             { name: 'anotherfeature', value: '999' },
             { name: 'boolfeature', value: true },
         ]
+    }
+    async getCount() {
+
     }
 }
 export default AnnouncementsApi.instance;

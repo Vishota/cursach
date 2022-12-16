@@ -5,7 +5,7 @@
     import UserLink from '@/components/users/UserLink.vue';
     import { ref, reactive } from 'vue';
     import { useRoute } from 'vue-router';
-import GalleryComponent from '@/components/GalleryComponent.vue';
+    import GalleryComponent from '@/components/GalleryComponent.vue';
 
     var id = ref(parseInt(useRoute().params.id as string));
     var announcement = reactive(announcements.get(id.value));
@@ -20,7 +20,7 @@ import GalleryComponent from '@/components/GalleryComponent.vue';
     <div class="vertflex">
         <div class="upper block">
             <div class="gallery-container">
-                <GalleryComponent :pics="announcement.pics" class="gallery" />
+                <GalleryComponent :pics="announcement.pics" class="gallery" openable />
             </div>
             <div class="vertflex">
                 <h1 class="userselect">{{announcement.title}}</h1>

@@ -24,6 +24,9 @@ class Lang {
             passwordrepeat: "Пароль, еще раз",
             change: "Выбрать",
             theme: "Тема",
+            tomessage: "Написать",
+            toreport: "Пожаловаться",
+            city: "Город",
             features: new Map<string, string>([['somefeature','Какая-то характеристика'], ['anotherfeature', 'Другая характеристика'], ['boolfeature', 'Характеристика типа да/нет']])
         }
     }

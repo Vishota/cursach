@@ -15,5 +15,11 @@ class UsersApi {
     async getLogin(id : number) : Promise<string> {
         return 'testlogin' + id;
     }
+    async getPic(id: number) {
+        return 'https://www.meme-arsenal.com/memes/ce3dd0d28f702bd9fb6c533e2cbe4b37.jpg';
+    }
+    async getCity(id: number) {
+        return 'Минск, Беларусь'
+    }
 }
 export default UsersApi.instance;

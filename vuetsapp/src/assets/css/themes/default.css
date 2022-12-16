@@ -4,4 +4,7 @@
     --c-content: #ffe;
     --c-accent: #09f;
     --c-wrong: #f00;
+    --c-bad: #f00;
+    --c-okay: #ff0;
+    --c-good: #0f0;
 }

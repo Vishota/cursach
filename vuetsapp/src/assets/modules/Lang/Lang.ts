@@ -27,6 +27,9 @@ class Lang {
             tomessage: "Написать",
             toreport: "Пожаловаться",
             city: "Город",
+            rating: "Рейтинг",
+            announcements: "Объявления",
+            noannouncements: "Нет объявлений",
             features: new Map<string, string>([['somefeature','Какая-то характеристика'], ['anotherfeature', 'Другая характеристика'], ['boolfeature', 'Характеристика типа да/нет']])
         }
     }

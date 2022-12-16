@@ -1,4 +1,5 @@
 import Announcement from "./Announcement";
+import type AnnouncementsQuery from './AnnouncementsQuery';
 
 class AnnouncementsModule {
     private static _instance : AnnouncementsModule;
@@ -18,6 +19,12 @@ class AnnouncementsModule {
     }
     public getIds() : Array<number> {
         return [1, 2, 3];
+    }
+    public find(query: AnnouncementsQuery) : Array<number> {
+        return [2,5];
+    }
+    public count(query: AnnouncementsQuery) : number {
+        return 2;
     }
 }
 export default AnnouncementsModule.instance;

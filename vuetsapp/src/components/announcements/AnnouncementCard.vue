@@ -8,15 +8,16 @@ if(props.id === undefined) throw('undefined id');
 var announcement = reactive(announcements.get(props.id) as Announcement);
 </script>
 <template>
-    <div class="container">
-        <GalleryComponent :pics="announcement.pics" class="gallery" />
-        <h1 class="title">{{ announcement.title }}</h1>
-        <p class="description bottomshading">{{ announcement.description }}</p>
-        <p class="price">{{ announcement.price }} BYN</p>
-    </div>
+    <RouterLink :to="'/announcements/'+id">
+        <div class="container">
+            <GalleryComponent :pics="announcement.pics" class="gallery" />
+            <h1 class="title">{{ announcement.title }}</h1>
+            <p class="description bottomshading">{{ announcement.description }}</p>
+            <p class="price">{{ announcement.price }} BYN</p>
+        </div>
+    </RouterLink>
 </template>
 <style scoped>
-
     .gallery {
         height: 40%;
         border-radius: var(--s-border-radius);

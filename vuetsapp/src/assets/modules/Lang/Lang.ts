@@ -13,8 +13,18 @@ class Lang {
     }
     get():any {
         return {
-            signin: "Войти",
-            signup: "Зарегистрироваться"
+            yes: "Да",
+            no: "Нет",
+            tosignin: "Войти",
+            tosignup: "Зарегистрироваться",
+            signin: "Вход",
+            signup: "Регистрация",
+            login: "Логин",
+            password: "Пароль",
+            passwordrepeat: "Пароль, еще раз",
+            change: "Выбрать",
+            theme: "Тема",
+            features: new Map<string, string>([['somefeature','Какая-то характеристика'], ['anotherfeature', 'Другая характеристика'], ['boolfeature', 'Характеристика типа да/нет']])
         }
     }
 }

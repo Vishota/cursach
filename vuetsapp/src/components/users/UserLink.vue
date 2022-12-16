@@ -4,7 +4,8 @@
     import users from '../../assets/modules/Users/UsersModule'
 
     var props = defineProps(['id']);
+    var user = reactive(users.get(props.id));
 </script>
 <template>
-    <RouterLink :to="'/users/'+id">{{users.get(id).login}}</RouterLink>
+    <RouterLink :to="'/users/'+id">{{user.login}}</RouterLink>
 </template>

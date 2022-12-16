@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import AnnouncementCard from '@/components/announcements/AnnouncementCard.vue';
-import UserLink from '@/components/users/UserLink.vue';
+    import AnnouncementCard from '@/components/announcements/AnnouncementCard.vue';
 </script>
 <template>
     <h1>Main</h1>
@@ -18,6 +17,7 @@ import UserLink from '@/components/users/UserLink.vue';
             <AnnouncementCard id="5" />
         </div>
     </p>
+    <!--<WindowComponent title="Вход" :contentcomp="SignInWindow" />-->
 </template>
 <style>
     .test {

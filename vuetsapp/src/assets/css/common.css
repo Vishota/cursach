@@ -8,11 +8,34 @@ body {
     color: var(--c-content);
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 400;
+    overflow-x: hidden;
+}
+
+h1,h2,h3,h4,h5,h6,p {
+    margin: unset;
+}
+
+*::-webkit-scrollbar {
+    background-color: var(--c-blocks);
+    width: var(--s-base-indent);
+}
+*::-webkit-scrollbar-thumb {
+    background-color: var(--c-back);
+    border-radius: var(--s-border-radius);
+    border: 1px solid var(--c-blocks)
+}
+*::-webkit-scrollbar-thumb:hover {
+    border-color: var(--c-accent);
+}
+*::-webkit-scrollbar-thumb:active {
+    background-color: var(--c-accent);
 }
 #app {
     height: 100vh;
 }
+
 a { color: unset; text-decoration: unset; }
+input, button, select { outline: unset; }
 
 .pagewidth {
     width: var(--s-page);
@@ -45,4 +68,90 @@ a { color: unset; text-decoration: unset; }
 }
 .block {
     background-color: var(--c-block);
+}
+
+.in {
+    background-color: var(--c-back);
+    border-radius: var(--s-border-radius);
+    border: 1px solid var(--c-blocks);
+    box-sizing: border-box;
+    padding: calc(var(--s-base-indent) / 2) var(--s-base-indent);
+    color: var(--c-content);
+}
+.in:invalid {
+    border-color: var(--c-wrong);
+}
+.in:focus {
+    border-color: var(--c-accent);
+}
+.in::placeholder {
+    color: var(--c-content);
+    opacity: .25;
+}
+.butregular {
+    background-color: var(--c-back);
+    border: 1px solid var(--c-accent);
+    color: var(--c-content);
+    cursor: pointer;
+    border-radius: var(--s-border-radius);
+    box-sizing: border-box;
+    padding: calc(var(--s-base-indent) / 2) var(--s-base-indent);
+    transition: .2s;
+}
+.butregular:hover {
+    background-color: var(--c-blocks);
+}
+.butregular:active {
+    background-color: var(--c-accent);
+    color: var(--c-blocks)
+}
+.butaccent {
+    background-color: var(--c-accent);
+    border: 1px solid var(--c-blocks);
+    color: var(--c-content);
+    cursor: pointer;
+    border-radius: var(--s-border-radius);
+    box-sizing: border-box;
+    padding: calc(var(--s-base-indent) / 2) var(--s-base-indent);
+    transition: .2s;
+}
+.butaccent:hover {
+    border-color: var(--c-accent)
+}
+.butaccent:active {
+    background-color: var(--c-back);
+    color: var(--c-content)
+}
+
+.fullwidth {
+    width: 100%;
+}
+
+.select {
+    appearance: none;
+    background-color: var(--c-back);
+    color: var(--c-content);
+    padding: calc(var(--s-base-indent) / 2) var(--s-base-indent);
+    border-radius: var(--s-border-radius);
+}
+
+.block {
+    box-sizing: border-box;
+    padding: var(--s-base-indent);
+    border-radius: var(--s-border-radius);
+    background-color: var(--c-blocks);
+}
+
+.horflex {
+    display: flex;
+    gap: var(--s-base-indent);
+}
+.vertflex {
+    display: flex;
+    gap: var(--s-base-indent);
+    flex-direction: column;
+}
+
+.userselect {
+    user-select: text;
 }

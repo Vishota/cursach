@@ -1,4 +1,5 @@
 import api from './AnnouncemetsApi';
+import AnnouncementFeature from './AnnouncementFeature';
 
 export default
 class Announcement {
@@ -6,7 +7,8 @@ class Announcement {
     private _title? : string;
     private _description? : string;
     private _pics? : Array<string>;
-    private _price? : number;
+    private _price? : string;
+    private _features? : Array<AnnouncementFeature>;
 
     constructor (id:number) {
         this._id = id;
@@ -39,13 +41,25 @@ class Announcement {
         }
         return this._description as string;
     }
-    public get price() : number {
+    public get price() : string {
         if(this._price === undefined) {
             api.getPrice(this._id)
                 .then(price => {
                     this._price = price;
                 })
         }
-        return this._price as number;
+        return this._price as string;
+    }
+    public get features() : Array<AnnouncementFeature> {
+        if(this._features === undefined) {
+            this._features = [];
+            api.getFeatures(this._id)
+                .then((arr:Array<any>) => {
+                    arr.forEach(el => {
+                        this._features?.push(new AnnouncementFeature(el.name, el.value))
+                    });
+                })
+        }
+        return this._features;
     }
 }

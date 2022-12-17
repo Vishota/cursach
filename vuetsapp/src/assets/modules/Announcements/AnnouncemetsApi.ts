@@ -1,6 +1,7 @@
 import SingletonDuplicationError from "../Errors/SingletonDuplicationError";
+import type Api from "../_abstract/Api";
 
-class AnnouncementsApi {
+/*delete export then*/export class AnnouncementsApi implements Api {
     private static _instance : AnnouncementsApi;
     public static get instance() : AnnouncementsApi {
         if(this._instance === undefined) {

@@ -1,4 +1,6 @@
-class AuthApi {
+import type Api from "../_abstract/Api";
+
+/*delete export then*/export class AuthApi implements Api {
     private static _instance : AuthApi;
     public static get instance() : AuthApi {
         if(this._instance === undefined) {

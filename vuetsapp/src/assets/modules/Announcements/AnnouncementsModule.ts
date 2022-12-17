@@ -1,7 +1,8 @@
+import type Module from "../_abstract/Module";
 import Announcement from "./Announcement";
 import type AnnouncementsQuery from './AnnouncementsQuery';
 
-class AnnouncementsModule {
+/*delete export then*/export class AnnouncementsModule implements Module {
     private static _instance : AnnouncementsModule;
     public static get instance() : AnnouncementsModule {
         if(this._instance === undefined) {
@@ -28,3 +29,4 @@ class AnnouncementsModule {
     }
 }
 export default AnnouncementsModule.instance;
+

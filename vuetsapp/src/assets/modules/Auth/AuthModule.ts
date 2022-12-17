@@ -1,8 +1,9 @@
 import auth from "./AuthApi";
 import SingletonDuplicationError from '../Errors/SingletonDuplicationError';
 import * as cookie from "../cookie";
+import type Module from "../_abstract/Module";
 
-class AuthModule {
+/*delete export then*/export class AuthModule implements Module {
     private static _instance : AuthModule;
     public static get instance() : AuthModule {
         if(this._instance === undefined) {

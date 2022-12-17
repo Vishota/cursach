@@ -1,6 +1,6 @@
 import SingletonDuplicationError from "../Errors/SingletonDuplicationError";
 
-class UsersApi {
+/*delete export then*/export class UsersApi {
     private static _instance : UsersApi;
     static get instance() : UsersApi {
         if(this._instance === undefined)

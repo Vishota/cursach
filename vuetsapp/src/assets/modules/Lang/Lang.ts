@@ -1,6 +1,6 @@
 import SingletonDuplicationError from "../Errors/SingletonDuplicationError";
 
-class Lang {
+/*delete export then*/export class Lang {
     private static _instance : Lang;
     public static get instance() {
         if(this._instance === undefined)

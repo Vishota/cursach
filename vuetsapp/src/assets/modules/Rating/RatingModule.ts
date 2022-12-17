@@ -1,5 +1,6 @@
 import SingletonDuplicationError from '../Errors/SingletonDuplicationError';
-class RatingModule {
+import type Module from '../_abstract/Module';
+/*delete export then*/export class RatingModule implements Module {
     private static _instance: RatingModule;
     public static get instance(): RatingModule {
         if(this._instance === undefined) this._instance = new RatingModule();

@@ -1,8 +1,9 @@
 import api from './AnnouncemetsApi';
 import AnnouncementFeature from './AnnouncementFeature';
+import type ModuleObject from '../_abstract/ModuleObject';
 
 export default
-class Announcement {
+class Announcement implements ModuleObject {
     private readonly _id : number;
     private _title? : string;
     private _description? : string;

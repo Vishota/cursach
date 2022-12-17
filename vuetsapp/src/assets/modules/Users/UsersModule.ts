@@ -1,7 +1,7 @@
 import SingletonDuplicationError from "../Errors/SingletonDuplicationError";
 import User from "./User";
 
-class UsersModule {
+/*delete export then*/export class UsersModule {
     private static _instance : UsersModule;
     public static get instance() {
         if (!UsersModule._instance) {

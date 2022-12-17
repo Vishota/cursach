@@ -40,28 +40,28 @@
     </div>
 </template>
 <style scoped>
-.gallery-container {
-    width: 100%;
-}
-.upper.block {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    height: fit-content;
-    gap: var(--s-base-indent)
-}
-.gallery {
-    border-radius: var(--s-border-radius);
-}
-h1,h3 {
-    margin: 0;
-}
-p {
-    margin: 0;
-}
-.features {
-    width: 100%;
-}
-.features tr td:first-child {
-    width: 40%;
-}
+    .gallery-container {
+        width: 100%;
+    }
+    .upper.block {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        height: fit-content;
+        gap: var(--s-base-indent)
+    }
+    .gallery {
+        border-radius: var(--s-border-radius);
+    }
+    h1,h3 {
+        margin: 0;
+    }
+    p {
+        margin: 0;
+    }
+    .features {
+        width: 100%;
+    }
+    .features tr td:first-child {
+        width: 40%;
+    }
 </style>

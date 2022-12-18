@@ -20,6 +20,7 @@
 <style scoped>
     .gallery {
         height: 40%;
+        width: 100%;
         border-radius: var(--s-border-radius);
     }
     .container {

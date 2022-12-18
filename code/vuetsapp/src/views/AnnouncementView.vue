@@ -42,6 +42,7 @@
 <style scoped>
     .gallery-container {
         width: 100%;
+        aspect-ratio: 1.8;
     }
     .upper.block {
         display: grid;

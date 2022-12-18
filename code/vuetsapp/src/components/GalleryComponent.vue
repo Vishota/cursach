@@ -29,7 +29,7 @@
 </script>
 <template>
     <div>
-        <img loading="lazy" @click="onClick" @mousemove="updateShownImage" v-show="i == shown" v-for="pic, i in pics" :src="pics.at(i)">
+        <img class="pointer" loading="lazy" @click="onClick" @mousemove="updateShownImage" v-show="i == shown" v-for="pic, i in pics" :src="pics.at(i)">
     </div>
 </template>
 <style scoped>
@@ -38,6 +38,10 @@
         width: 100%;
         object-fit: cover;
         border-radius: inherit;
+        background-image: url('/loading.gif');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
     }
     div {
         width: 100%;

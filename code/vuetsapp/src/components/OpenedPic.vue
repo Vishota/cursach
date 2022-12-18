@@ -9,7 +9,8 @@
         console.log(shownPic.value)
     }
     function prev() {
-        shownPic.value = Math.abs(shownPic.value - 1) % props.pics.length;
+        shownPic.value = (shownPic.value - 1) % props.pics.length;
+        if(shownPic.value < 0) shownPic.value += props.pics.length;
         console.log(shownPic.value)
     }
     function select(event : MouseEvent) {
@@ -23,15 +24,15 @@
     <div class="container" id="piccontainer">
         <div class="blackout"></div>
         <div class="gridwrapper">
-            <div class="close" @click="close">&#9932;</div>
+            <div class="close viewer-interface" @click="close">&#9932;</div>
             <img class="bigpic" :src="pic" v-for="(pic, i) in pics" v-show="shownPic == i">
-            <div class="listwrapper">
+            <div class="listwrapper viewer-interface">
                 <div class="list">
                     <img v-for="(pic, i) in pics" :src="pic" :n="i" @click="select">
                 </div>
             </div>
-            <div class="next" @click="next">&#10097;</div>
-            <div class="prev" @click="prev">&#10096;</div>
+            <div class="next viewer-interface" @click="next">&#10097;</div>
+            <div class="prev viewer-interface" @click="prev">&#10096;</div>
         </div>
     </div>
 </template>
@@ -104,12 +105,7 @@
         grid-column-end: 4;
         width: 100%;
         height: 100%;
-        background-color: var(--c-back);
-        color: var(--c-accent);
         font-size: 30px;
-        opacity: .1;
-        transition: .5s;
-        cursor: pointer;
     }
     .prev {
         display: flex;
@@ -121,14 +117,16 @@
         grid-column-end: 2;
         width: 100%;
         height: 100%;
-        background-color: var(--c-block);
-        opacity: .1;
-        color: var(--c-accent);
         font-size: 30px;
+    }
+    .viewer-interface {
+        opacity: .1;
         transition: .5s;
+        background-color: var(--c-blocks);
         cursor: pointer;
     }
-    .prev:hover, .next:hover {
+    .viewer-interface:hover {
         opacity: 1;
+        color: var(--c-accent)
     }
 </style>

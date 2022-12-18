@@ -1,5 +1,6 @@
 import SingletonDuplicationError from "../Errors/SingletonDuplicationError";
 import type Api from "../_abstract/Api";
+import { post } from "../ajax"
 
 /*delete export then*/export class AnnouncementsApi implements Api {
     private static _instance : AnnouncementsApi;
@@ -19,10 +20,11 @@ import type Api from "../_abstract/Api";
         return 'Mercedes-Benz 1982 год';
     }
     async getDescription(id : number) : Promise<string> {
-        return 'В хорошем состоянии 2.4дизель. Сварочных работ не требует. Снят с учета.';
+        return 'В хорошем состоянии 2.4 дизель. Сварочных работ не требует. Снят с учета.';
     }
     async getPics(id: number) : Promise<Array<string>> {
-        return ['https://yams.kufar.by/api/v1/kufar-ads/images/43/4301979529.jpg?rule=gallery',
+        return await post('/api/announcements/pics.php', { id }, 'json');
+        /*return ['https://yams.kufar.by/api/v1/kufar-ads/images/43/4301979529.jpg?rule=gallery',
             'https://yams.kufar.by/api/v1/kufar-ads/images/43/4361642762.jpg?rule=gallery',
             'https://yams.kufar.by/api/v1/kufar-ads/images/43/4370166081.jpg?rule=gallery',
             'https://yams.kufar.by/api/v1/kufar-ads/images/43/4395736038.jpg?rule=gallery',
@@ -30,7 +32,7 @@ import type Api from "../_abstract/Api";
             'https://yams.kufar.by/api/v1/kufar-ads/images/43/4398015866.jpg?rule=gallery',
             'https://yams.kufar.by/api/v1/kufar-ads/images/43/4306539185.jpg?rule=gallery',
             'https://yams.kufar.by/api/v1/kufar-ads/images/43/4368482246.jpg?rule=gallery'
-        ]
+        ]*/
     }
     async getPrice(id: number) : Promise<string> {
         return '10$';

@@ -16,13 +16,21 @@ import type Api from "../_abstract/Api";
     }
 
     async getTitle(id : number) : Promise<string> {
-        return 'title ' + id;
+        return 'Mercedes-Benz 1982 год';
     }
     async getDescription(id : number) : Promise<string> {
-        return 'description ' + id + 'dslg.njasdl asiluh iuarsfiosarjo текст какой-то блин ааыа текст какой-то блин ааыа текст какой-то блин ааыа текст какой-то блин ааыа';
+        return 'В хорошем состоянии 2.4дизель. Сварочных работ не требует. Снят с учета.';
     }
     async getPics(id: number) : Promise<Array<string>> {
-        return ['https://pbs.twimg.com/media/D678wMfW0AAs733.jpg', 'https://avatars.mds.yandex.net/i?id=e8d5cfaeaa947002571cfe7a50e1930a016a7682-8244056-images-thumbs&n=13&exp=1']
+        return ['https://yams.kufar.by/api/v1/kufar-ads/images/43/4301979529.jpg?rule=gallery',
+            'https://yams.kufar.by/api/v1/kufar-ads/images/43/4361642762.jpg?rule=gallery',
+            'https://yams.kufar.by/api/v1/kufar-ads/images/43/4370166081.jpg?rule=gallery',
+            'https://yams.kufar.by/api/v1/kufar-ads/images/43/4395736038.jpg?rule=gallery',
+            'https://yams.kufar.by/api/v1/kufar-ads/images/43/4312782676.jpg?rule=gallery',
+            'https://yams.kufar.by/api/v1/kufar-ads/images/43/4398015866.jpg?rule=gallery',
+            'https://yams.kufar.by/api/v1/kufar-ads/images/43/4306539185.jpg?rule=gallery',
+            'https://yams.kufar.by/api/v1/kufar-ads/images/43/4368482246.jpg?rule=gallery'
+        ]
     }
     async getPrice(id: number) : Promise<string> {
         return '10$';

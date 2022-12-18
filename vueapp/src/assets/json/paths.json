@@ -1,8 +1,0 @@
-{
-    "root": "/",
-    "json": {
-        "about": "/src/assets/json/about.json",
-        "langs": "/src/assets/json/langs/",    
-        "lang_default": "/src/assets/json/langs/en.json"
-    }
-}

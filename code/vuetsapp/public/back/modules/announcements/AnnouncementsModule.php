@@ -17,7 +17,7 @@
             
             $text = self::getFromQuery($query, 'text', '[^\|]');
             if($text !== null) {
-                array_push($conditions, '( SEARCH_DIFF(title, :text) < 0.1 OR SEARCH_DIFF(description, :text) < 0.05 )');
+                array_push($conditions, 'MATCH (title, description) AGAINST :text');
                 $params['text'] = $text;
             }
             $pricemin = self::getFromQuery($query, 'pricemin', '\d');
@@ -36,9 +36,11 @@
             ];
             //return " WHERE price >= $pricemin AND price <= $pricemax";
         }
+        function search(string $) {
+
+        }
         function __construct() {
             
         }
-        
     }
     var_dump(AnnouncementsModule::queryToRequest('text=а b c|pricemin=1|pricemax=100'));

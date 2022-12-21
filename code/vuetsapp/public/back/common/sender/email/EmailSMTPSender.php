@@ -40,10 +40,11 @@
          */
         public function send(array $info) {
             $this->mailer->addAddress($info['recipient']);
-            $this->mailer->isHTML($info['html']);
+            $this->mailer->isHTML((isset($info['html']) ? $info['html'] : true));
             $this->mailer->Subject = $info['subject'];
             $this->mailer->Body = $info['message'];
-            if($this->mailer->send() == false) throw new NotSentException(gettype($this));
+            $result = $this->mailer->send();
+            if($result == false) throw new NotSentException(gettype($this));
+            return $result;
         }
     }
-

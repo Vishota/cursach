@@ -10,7 +10,7 @@ trait SingletonTrait {
             throw new SingletonDuplicationException(gettype($this));
         }
     }
-    private function __construct() {
+    protected function __construct() {
         $this->preventDuplication();
         $this->__init();
     }

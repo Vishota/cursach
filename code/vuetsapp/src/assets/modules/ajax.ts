@@ -3,7 +3,7 @@
     JSON
 }*/
 
-export async function post(url: string, data: Object, fetchType: string = 'text') {
+export async function post(url: string, data: Object, fetchType: string = 'json') {
     let body = new URLSearchParams();
     Object.keys(data).forEach(function(key) {
         body.append(key, (data as any)[key]);

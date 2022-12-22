@@ -83,6 +83,10 @@ input, button, select { outline: unset; }
     padding: calc(var(--s-base-indent) / 2) var(--s-base-indent);
     color: var(--c-content);
 }
+.in:disabled {
+    opacity: .9;
+    color: var(--c-pale);
+}
 .in:invalid {
     border-color: var(--c-wrong);
 }

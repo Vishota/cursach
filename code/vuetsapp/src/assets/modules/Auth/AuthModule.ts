@@ -1,6 +1,7 @@
 import auth from "./AuthApi";
 import SingletonDuplicationError from '../Errors/SingletonDuplicationError';
 import * as cookie from "../cookie";
+import * as ajax from "../ajax";
 import type Module from "../_abstract/Module";
 
 /*delete export then*/export class AuthModule implements Module {
@@ -14,14 +15,18 @@ import type Module from "../_abstract/Module";
     private constructor() {
         if(AuthModule._instance !== undefined) throw new SingletonDuplicationError('AuthModule duplication');
     }
-    private checkToken(id: number, token: string) : number|null {
+    private checkToken(id: number, token: string) {
         cookie.eraseCookie('id');
         cookie.eraseCookie('token');
         return null;
     }
-    public signin(login: string, password: string) : number|null {
+    public async signin(login: string, password: string) {
         return null;
     }
+    public async sendEmailCode(email: string) {
+        return await ajax.post('/api/auth/email/sendcode.php', {email});
+    }
+
     public check() : number|null {
         return this.checkToken(parseInt(cookie.getCookie('id') as string), cookie.getCookie('token') as string);
     }

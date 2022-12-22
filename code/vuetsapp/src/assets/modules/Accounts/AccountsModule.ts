@@ -1,5 +1,4 @@
 import SingletonDuplicationError from '../Errors/SingletonDuplicationError';
-import * as cookie from "../cookie";
 import * as ajax from "../ajax";
 import type Module from "../_abstract/Module";
 

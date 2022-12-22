@@ -22,7 +22,7 @@
     var showUsernameHint = ref(false);
     var showPasswordHint = ref(false);
     // pass = pass repeat
-    var passwordsMatches = ref(false);
+    //var passwordsMatches = ref(false);
     
     // all inputs correct
     var inputsOkay = ref(false);

@@ -1,9 +1,8 @@
-import Announcement from './Announcement';
-
 export default
 class AnnouncementsQuery {
     private static readonly _sortTypes = {
         recent: 'recent',
+        relevance: 'relevance',
         priceasc: 'priceasc',
         pricedesc: 'pricedesc'
     };
@@ -36,5 +35,16 @@ class AnnouncementsQuery {
     setOwner(id: number) {
         this._owner = id;
         return this;
+    }
+
+    toStringQuery() : string {
+        var query = '';
+        if(this._limit) query += this._limit + '|';
+        if(this._sort) query += this._sort + '|';
+        if(this._pricemax) query += this._pricemax + '|';
+        if(this._pricemin) query += this._pricemin + '|';
+        if(this._owner) query += this._owner + '|';
+        if(this._sort) query += this._sort;
+        return query;
     }
 }

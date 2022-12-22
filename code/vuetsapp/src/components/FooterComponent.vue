@@ -1,10 +1,9 @@
 <script setup lang="ts">
     import ThemesSelector from './themes/ThemesSelector.vue';
-    import Lang from '@/assets/modules/Lang/Lang';
 </script>
 <template>
     <footer class="pagewidth pagepadding">
-        {{ Lang.get().theme }}: <ThemesSelector />
+        Тема: <ThemesSelector />
     </footer>
 </template>
 <style scoped>

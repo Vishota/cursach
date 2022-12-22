@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-    import lang from '@/assets/modules/Lang/Lang';
     import users from '@/assets/modules/Users/UsersModule';
     import UserLink from '@/components/users/UserLink.vue';
     import { ref, reactive } from 'vue';
@@ -17,19 +16,19 @@
         <div class="upper block">
             <div class="vertflex">
                 <h2><UserLink :id="id"/></h2>
-                <p>{{lang.get().city}}: {{user.city}}</p>
+                <p>Город: {{user.city}}</p>
             </div>
             <div class="vertflex">
                 <div class="gallery-container">
                     <GalleryComponent :pics="[user.pic]" class="gallery" openable />
                 </div>
-                <button class="butaccent">{{ lang.get().tomessage }}</button>
-                <button class="butregular">{{ lang.get().toreport }}</button>
+                <button class="butaccent">Связаться</button>
+                <button class="butregular">Пожаловаться</button>
             </div>
         </div>
         <div class="block">
-            <h2>{{ lang.get().announcements }}</h2>
-            <p v-show="announcements.count((new AnnouncementsQuery()).setOwner(id)) == 0">{{ lang.get().noannouncements }}</p>
+            <h2>Последние объявления</h2>
+            <p v-show="announcements.count((new AnnouncementsQuery()).setOwner(id)) == 0">Объявлений нет</p>
             <div class="announcements-grid">
                 <AnnouncementCard v-for="announcement in announcements.find((new AnnouncementsQuery()).setOwner(id))" :id="announcement" />
             </div>

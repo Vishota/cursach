@@ -8,7 +8,6 @@ import { post } from "../ajax"
         if(this._instance === undefined) {
             this._instance = new AnnouncementsApi();
         }
-        console.log(this._instance);
         return this._instance;
     }
     private constructor () {

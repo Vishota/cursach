@@ -16,5 +16,6 @@
     }
     catch (Throwable $e) {
         $return['status'] = false;
+        $return['thrown'] = $e->__toString();
     }
     echo json_encode($return);

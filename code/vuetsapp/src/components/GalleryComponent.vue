@@ -21,7 +21,6 @@
         createApp(OpenedPic, {pics: props.pics, show: shown.value}).mount(div);
     }
     function onClick() {
-        console.log(props.openable);
         if(props.openable !== undefined) {
             openPic();
         }

@@ -6,15 +6,45 @@
 
         // $_POST['email'] = 'vishotax3@gmail.com';
         // $_POST['code'] = 'x6SRV6YL';
+
+       // $_POST['username'] = 'vishota';
+       // $_POST['password'] = 'password';
+       // $_POST['email'] = '';
+       // $_POST['code'] = '';
+
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $code = $_POST['code'];
+        $email = $_POST['email'];
         
-        $return['status'] = ['okay'];
-        $verified = CursachEmailVerifier::getInstance()->checkVerification($_POST['email'], $_POST['code']);
+        if(! AccountsModule::getInstance()->isUsernameAllowed($username)) exit;
+        if(! AccountsModule::getInstance()->isPasswordAllowed($password)) exit;
+
+        if(! AccountsModule::getInstance()->isEmailAvailable($email)) {
+            $return['email'] = false;
+            echo json_encode($return);
+            exit;
+        }
+        if(! AccountsModule::getInstance()->isUsernameAvailable($username)) {
+            $return['username'] = false;
+            echo json_encode($return);
+            exit;
+        }
+
+        $verified = CursachEmailVerifier::getInstance()->checkVerification($email, $code);
         
         $return['code'] = $verified !== false;
+        if(! $return['code']) {
+            echo json_encode($return);
+            exit;
+        }
         
+        $return['account'] = AccountsModule::getInstance()->emailSignUp($username, $password, $email);
+
         $return['status'] = true;
     }
     catch (Throwable $e) {
         $return['status'] = false;
+        $return['thrown'] = $e->__toString();
     }
     echo json_encode($return);

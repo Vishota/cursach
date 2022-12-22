@@ -88,7 +88,7 @@ input, button, select { outline: unset; }
     color: var(--c-pale);
 }
 .in:invalid {
-    border-color: var(--c-wrong);
+    border: 1px solid var(--c-wrong);
 }
 .in:focus {
     border-color: var(--c-accent);
@@ -130,6 +130,11 @@ input, button, select { outline: unset; }
 .butaccent:active {
     background-color: var(--c-back);
     color: var(--c-content)
+}
+.butaccent:disabled, .butregular:disabled {
+    opacity: .8;
+    color: var(--c-pale);
+    cursor: not-allowed;
 }
 
 .fullwidth {

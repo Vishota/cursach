@@ -1,7 +1,6 @@
 import auth from "./AuthApi";
 import SingletonDuplicationError from '../Errors/SingletonDuplicationError';
 import * as cookie from "../cookie";
-import * as ajax from "../ajax";
 import type Module from "../_abstract/Module";
 
 /*delete export then*/export class AuthModule implements Module {
@@ -20,15 +19,17 @@ import type Module from "../_abstract/Module";
         cookie.eraseCookie('token');
         return null;
     }
-    public async signin(login: string, password: string) {
-        return null;
-    }
     public async sendEmailCode(email: string) {
-        return await ajax.post('/api/auth/email/sendcode.php', {email});
+        return await auth.sendEmailCode(email);
     }
-
-    public check() : number|null {
-        return this.checkToken(parseInt(cookie.getCookie('id') as string), cookie.getCookie('token') as string);
+    public async checkEmailCode(email: string, code: string) {
+        return await auth.checkEmailCode(email, code);
+    }
+    public async emailSignUp(email: string, code: string, username: string, password: string) {
+        return await auth.emailSignUp(email, code, username, password)
+    }
+    public async checkEmailAvailability(email: string) {
+        return await auth.checkEmailAvailability(email);
     }
 }
 

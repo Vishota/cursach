@@ -1,21 +1,18 @@
 import announcements from '@/assets/modules/Announcements/AnnouncementsModule';
 <script lang="ts" setup>
-    close();
+    import { closeWindow } from '@/assets/authwindows';
+    closeWindow();
 
     defineProps(['title', 'contentcomp']);
-
-    function close() {
-        document.querySelector('#wincontainer')?.remove();
-    }
 </script>
 <template>
     <div class="container" id="wincontainer">
-        <div class="blackout" @click="close"></div>
+        <div class="blackout" @click="closeWindow"></div>
         <div class="winwrapper">
             <div class="window">
                 <div class="winbar">
                     <div class="wintitle">{{ title }}</div>
-                    <div class="close" @click="close">&#215;</div>
+                    <div class="close" @click="closeWindow">&#215;</div>
                 </div>
                 <div class="content">
                     <span v-is="contentcomp" />

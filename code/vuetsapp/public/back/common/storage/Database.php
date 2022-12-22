@@ -22,4 +22,13 @@
             $sth->execute($params);
             return new DatabaseRequestResult($this->dbh, $sth);
         }
+        function beginTransaction() {
+            $this->dbh->beginTransaction();
+        }
+        function rollBack() {
+            $this->dbh->rollBack();
+        }
+        function commit() {
+            $this->dbh->commit();
+        }
     }

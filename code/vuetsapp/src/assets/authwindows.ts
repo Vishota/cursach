@@ -8,3 +8,6 @@ export function openSignInWindow() {
 export function openSignUpWindow() {
     createApp(SignUpWindow).mount(document.body.appendChild(document.createElement('div')));
 }
+export function closeWindow() {
+    document.querySelector('#wincontainer')?.remove();
+}

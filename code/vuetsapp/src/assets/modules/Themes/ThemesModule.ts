@@ -39,7 +39,6 @@ import type Module from '../_abstract/Module';
     private init() {
         var detected = this.detectSelected();
         if(detected !== null) {
-            console.log(1)
             this.select(detected);
         }
     }

@@ -8,8 +8,8 @@
     import GalleryComponent from '@/components/GalleryComponent.vue';
     import RatingComponent from '@/components/RatingComponent.vue';
     import announcements from '@/assets/modules/Announcements/AnnouncementsModule';
-import AnnouncementsQuery from '@/assets/modules/Announcements/AnnouncementsQuery';
-import AnnouncementCard from '@/components/announcements/AnnouncementCard.vue';
+    import AnnouncementsQuery from '@/assets/modules/Announcements/AnnouncementsQuery';
+    import AnnouncementCard from '@/components/announcements/AnnouncementCard.vue';
 
     var id = ref(parseInt(useRoute().params.id as string));
     var user = reactive(users.get(id.value));

@@ -2,16 +2,13 @@
     import { ref } from 'vue';
     var props = defineProps(['pics', 'show']);
     var shownPic = ref(props.show);
-    console.log(props);
     
     function next() {
         shownPic.value = (shownPic.value + 1) % props.pics.length;
-        console.log(shownPic.value)
     }
     function prev() {
         shownPic.value = (shownPic.value - 1) % props.pics.length;
         if(shownPic.value < 0) shownPic.value += props.pics.length;
-        console.log(shownPic.value)
     }
     function select(event : MouseEvent) {
         shownPic.value = (event.target as Element).getAttribute('n');

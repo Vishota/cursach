@@ -41,4 +41,10 @@ class User {
         }
         return this._city as string;
     }
+    fullInit() {
+        this.id;
+        this.login;
+        this.pic;
+        this.city;
+    }
 }

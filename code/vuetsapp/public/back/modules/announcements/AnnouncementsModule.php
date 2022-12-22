@@ -36,9 +36,9 @@
             ];
             //return " WHERE price >= $pricemin AND price <= $pricemax";
         }
-        function search(string $) {
+       /* function search(string $) {
 
-        }
+        }*/
         function __construct() {
             
         }

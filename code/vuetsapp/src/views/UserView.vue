@@ -1,12 +1,10 @@
 <script lang="ts" setup>
     import lang from '@/assets/modules/Lang/Lang';
     import users from '@/assets/modules/Users/UsersModule';
-    import rating from '@/assets/modules/Rating/RatingModule'
     import UserLink from '@/components/users/UserLink.vue';
     import { ref, reactive } from 'vue';
     import { useRoute } from 'vue-router';
     import GalleryComponent from '@/components/GalleryComponent.vue';
-    import RatingComponent from '@/components/RatingComponent.vue';
     import announcements from '@/assets/modules/Announcements/AnnouncementsModule';
     import AnnouncementsQuery from '@/assets/modules/Announcements/AnnouncementsQuery';
     import AnnouncementCard from '@/components/announcements/AnnouncementCard.vue';
@@ -20,7 +18,6 @@
             <div class="vertflex">
                 <h2><UserLink :id="id"/></h2>
                 <p>{{lang.get().city}}: {{user.city}}</p>
-                <RatingComponent :id="id" />
             </div>
             <div class="vertflex">
                 <div class="gallery-container">

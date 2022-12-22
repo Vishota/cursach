@@ -1,7 +1,7 @@
 <script lang="ts" setup>
     import { openSignInWindow } from '@/assets/authwindows';
     import { closeWindow } from '@/assets/authwindows';
-    import auth from '@/assets/modules/Auth/AuthModule'
+    import accounts from '@/assets/modules/Accounts/AccountsModule'
     import { ref } from 'vue';
     import router from '@/router/index';
     
@@ -41,7 +41,7 @@
         try {
             showBadEmailCode.value = false;
             var emailin = document.querySelector('#email') as HTMLInputElement;
-            var sent = await auth.sendEmailCode( emailin.value );
+            var sent = await accounts.sendEmailCode( emailin.value );
             if(sent.status && sent.sent) {
                 emailCodeStatus.value = 1;
             }
@@ -59,7 +59,7 @@
         var emailin = document.querySelector('#email') as HTMLInputElement;
         var codein = document.querySelector('#emailcode') as HTMLInputElement;
 
-        var checked = await auth.checkEmailCode( emailin.value, codein.value );
+        var checked = await accounts.checkEmailCode( emailin.value, codein.value );
         if(checked.status && checked.code) {
             emailCodeStatus.value = 2;
             showUsernamePasswordInputs.value = true;
@@ -75,7 +75,7 @@
         var usernamein = document.querySelector('#username') as HTMLInputElement;
         var passwordin = document.querySelector('#password') as HTMLInputElement;
 
-        var signedUp = await auth.emailSignUp(emailin.value, codein.value, usernamein.value, passwordin.value);
+        var signedUp = await accounts.emailSignUp(emailin.value, codein.value, usernamein.value, passwordin.value);
 
         if(signedUp.code === false) {
             resetEmailSignup();
@@ -98,7 +98,7 @@
     async function onEmailInput() {
         var emailin = document.querySelector('#email') as HTMLInputElement;
 
-        isEmailTaken.value = !(await auth.checkEmailAvailability(emailin.value)).available;
+        isEmailTaken.value = !(await accounts.checkEmailAvailability(emailin.value)).available;
 
         emailCodeStatus.value = 0;
         showBadEmailCode.value = false;
@@ -107,7 +107,7 @@
     /*async function onUsernameInput() {
         var usernamein = document.querySelector('#username') as HTMLInputElement;
 
-        isEmailTaken.value = !(await auth.checkEmailAvailability(usernamein.value)).available;
+        isEmailTaken.value = !(await accounts.checkEmailAvailability(usernamein.value)).available;
 
         emailCodeStatus.value = 0;
         showBadEmailCode.value = false;

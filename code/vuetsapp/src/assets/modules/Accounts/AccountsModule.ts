@@ -1,14 +1,20 @@
-import type Api from "../_abstract/Api";
+import SingletonDuplicationError from '../Errors/SingletonDuplicationError';
+import * as cookie from "../cookie";
 import * as ajax from "../ajax";
+import type Module from "../_abstract/Module";
 
-/*delete export then*/export class AuthApi implements Api {
-    private static _instance : AuthApi;
-    public static get instance() : AuthApi {
+/*delete export then*/export class AccountsModule implements Module {
+    private static _instance : AccountsModule;
+    public static get instance() : AccountsModule {
         if(this._instance === undefined) {
-            this._instance = new AuthApi();
+            this._instance = new AccountsModule();
         }
         return this._instance;
     }
+    private constructor() {
+        if(AccountsModule._instance !== undefined) throw new SingletonDuplicationError('AccountsModule duplication');
+    }
+    
     public async sendEmailCode(email: string) {
         return await ajax.post('/api/auth/email/sendcode.php', {email});
     }
@@ -23,4 +29,4 @@ import * as ajax from "../ajax";
     }
 }
 
-export default AuthApi.instance;
+export default AccountsModule.instance;

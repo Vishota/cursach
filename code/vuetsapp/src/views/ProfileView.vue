@@ -5,9 +5,13 @@
     import { ref, reactive } from 'vue';
     import { useRoute } from 'vue-router';
     import GalleryComponent from '@/components/GalleryComponent.vue';
+    import AnnouncementsQuery from '@/assets/modules/Announcements/AnnouncementsQuery';
+    import AnnouncementsList from '@/components/announcements/AnnouncementsList.vue';
+    import router from '@/router';
 
     var id = ref(parseInt(useRoute().params.id as string));
     var user = reactive(profiles.get(id.value));
+    var announcementsQuery = reactive( new AnnouncementsQuery().setOwner(id.value) );
 </script>
 <template>
     <div class="vertflex">
@@ -19,14 +23,13 @@
                 <div class="gallery-container">
                     <GalleryComponent :pics="[ user.pic ]" class="gallery" openable />
                 </div>
-                <button class="butregular" v-if="accounts.getMyId() === id">Настройки</button>
+                <button class="butaccent" v-if="accounts.getMyId() === id" @click="router.push('/new')">Создать объявление</button>
+                <!----<button class="butregular" v-if="accounts.getMyId() === id">Настройки</button>-->
             </div>
         </div>
         <div class="block">
             <h2>Последние объявления</h2>
-            <div class="announcements-grid">
-                
-            </div>
+            <AnnouncementsList :query="announcementsQuery" />
         </div>
     </div>
 </template>

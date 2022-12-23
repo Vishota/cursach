@@ -14,6 +14,9 @@ body {
 h1,h2,h3,h4,h5,h6,p {
     margin: unset;
 }
+textarea {
+    font-family: unset;
+}
 
 *::-webkit-scrollbar {
     background-color: var(--c-blocks);
@@ -40,7 +43,7 @@ h1,h2,h3,h4,h5,h6,p {
 }
 
 a { color: unset; text-decoration: unset; }
-input, button, select { outline: unset; }
+input, button, select, textarea { outline: unset; }
 
 .pagewidth {
     width: var(--s-page);

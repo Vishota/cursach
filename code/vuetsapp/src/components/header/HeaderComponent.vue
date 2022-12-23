@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import HeaderMenu from './HeaderMenu.vue';
-import HeaderSearch from './HeaderSearch.vue';
+    import HeaderSearch from './HeaderSearch.vue';
 </script>
 <template>
     <div class="pagewidth pagepadding"></div>
@@ -19,6 +19,7 @@ import HeaderSearch from './HeaderSearch.vue';
         margin-bottom: var(--s-base-indent);
     }
     header {
+        z-index: 1;
         height: var(--header-h);
         position: fixed;
         top: 0; left: 0;

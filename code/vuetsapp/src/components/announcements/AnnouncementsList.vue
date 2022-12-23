@@ -11,16 +11,16 @@
     });
 </script>
 <template>
+    <p v-show="found.ids.length == 0">Таких объявлений нет</p>
     <div class="announcements-grid">
         <AnnouncementCard v-for="id in found.ids" :id="id" />
-        <p v-show="found.ids.length == 0">Таких объявлений нет</p>
     </div>
 </template>
 <style scoped>
-.announcements-grid {
-    display: grid;
-    grid-template-columns: repeat(var(--n-hor-announcements), 1fr);
-    grid-auto-rows: 300px;
-    gap: var(--s-base-indent);
-}
+    .announcements-grid {
+        display: grid;
+        grid-template-columns: repeat(var(--n-hor-announcements), 1fr);
+        grid-auto-rows: 300px;
+        gap: var(--s-base-indent);
+    }
 </style>

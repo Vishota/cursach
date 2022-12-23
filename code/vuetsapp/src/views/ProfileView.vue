@@ -1,21 +1,19 @@
 <script lang="ts" setup>
-    import users from '@/assets/modules/Users/UsersModule';
-    import UserLink from '@/components/users/UserLink.vue';
+    import users from '@/assets/modules/Profiles/ProfilesModule';
+    import ProfileLink from '@/components/users/ProfileLink.vue';
     import { ref, reactive } from 'vue';
     import { useRoute } from 'vue-router';
     import GalleryComponent from '@/components/GalleryComponent.vue';
-    import announcements from '@/assets/modules/Announcements/AnnouncementsModule';
-    import AnnouncementsQuery from '@/assets/modules/Announcements/AnnouncementsQuery';
-    import AnnouncementCard from '@/components/announcements/AnnouncementCard.vue';
 
     var id = ref(parseInt(useRoute().params.id as string));
     var user = reactive(users.get(id.value));
+    
 </script>
 <template>
     <div class="vertflex">
         <div class="upper block">
             <div class="vertflex">
-                <h2><UserLink :id="id"/></h2>
+                <h2><ProfileLink :id="id"/></h2>
                 <p>Город: {{user.city}}</p>
             </div>
             <div class="vertflex">
@@ -28,9 +26,8 @@
         </div>
         <div class="block">
             <h2>Последние объявления</h2>
-            <p v-show="announcements.count((new AnnouncementsQuery()).setOwner(id)) == 0">Объявлений нет</p>
             <div class="announcements-grid">
-                <AnnouncementCard v-for="announcement in announcements.find((new AnnouncementsQuery()).setOwner(id))" :id="announcement" />
+                
             </div>
         </div>
     </div>
@@ -48,9 +45,5 @@
     .gallery {
         border-radius: var(--s-border-radius);
         aspect-ratio: 1;
-    }
-    .announcements-grid {
-        display: grid;
-        grid-template-columns: repeat(var(--n-hor-announcements), 1fr);
     }
 </style>

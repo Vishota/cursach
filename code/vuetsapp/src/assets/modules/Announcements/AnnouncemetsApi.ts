@@ -1,8 +1,7 @@
 import SingletonDuplicationError from "../Errors/SingletonDuplicationError";
-import type Api from "../_abstract/Api";
 import { post } from "../ajax"
 
-/*delete export then*/export class AnnouncementsApi implements Api {
+/*delete export then*/export class AnnouncementsApi {
     private static _instance : AnnouncementsApi;
     public static get instance() : AnnouncementsApi {
         if(this._instance === undefined) {
@@ -16,35 +15,19 @@ import { post } from "../ajax"
     }
 
     async getTitle(id : number) : Promise<string> {
-        return 'Mercedes-Benz 1982 год';
+        return (await post('/api/announcements/title.php', {id})).title;
     }
     async getDescription(id : number) : Promise<string> {
-        return 'В хорошем состоянии 2.4 дизель. Сварочных работ не требует. Снят с учета.';
+        return (await post('/api/announcements/description.php', {id})).description;
     }
     async getPics(id: number) : Promise<Array<string>> {
-        return await post('/api/announcements/pics.php', { id }, 'json');
-        /*return ['https://yams.kufar.by/api/v1/kufar-ads/images/43/4301979529.jpg?rule=gallery',
-            'https://yams.kufar.by/api/v1/kufar-ads/images/43/4361642762.jpg?rule=gallery',
-            'https://yams.kufar.by/api/v1/kufar-ads/images/43/4370166081.jpg?rule=gallery',
-            'https://yams.kufar.by/api/v1/kufar-ads/images/43/4395736038.jpg?rule=gallery',
-            'https://yams.kufar.by/api/v1/kufar-ads/images/43/4312782676.jpg?rule=gallery',
-            'https://yams.kufar.by/api/v1/kufar-ads/images/43/4398015866.jpg?rule=gallery',
-            'https://yams.kufar.by/api/v1/kufar-ads/images/43/4306539185.jpg?rule=gallery',
-            'https://yams.kufar.by/api/v1/kufar-ads/images/43/4368482246.jpg?rule=gallery'
-        ]*/
+        return (await post('/api/announcements/pics.php', {id})).pics;
     }
     async getPrice(id: number) : Promise<string> {
-        return '10$';
+        return (await post('/api/announcements/price.php', {id})).price;
     }
     async getFeatures(id: number) {
-        return [
-            { name: 'somefeature', value: '10' },
-            { name: 'anotherfeature', value: '999' },
-            { name: 'boolfeature', value: true },
-        ]
-    }
-    async getCount() {
-
+        return (await post('/api/announcements/features.php', {id})).features;
     }
 }
 export default AnnouncementsApi.instance;

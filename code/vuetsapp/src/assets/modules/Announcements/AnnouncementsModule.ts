@@ -1,8 +1,8 @@
-import type Module from "../_abstract/Module";
 import Announcement from "./Announcement";
 import type AnnouncementsQuery from './AnnouncementsQuery';
+import { post } from '@/assets/modules/ajax'
 
-/*delete export then*/export class AnnouncementsModule implements Module {
+/*delete export then*/export class AnnouncementsModule {
     private static _instance : AnnouncementsModule;
     public static get instance() : AnnouncementsModule {
         if(this._instance === undefined) {
@@ -18,14 +18,8 @@ import type AnnouncementsQuery from './AnnouncementsQuery';
         }
         return this._cached.get(id) as Announcement;
     }
-    public getIds() : Array<number> {
-        return [1, 2, 3];
-    }
-    public find(query: AnnouncementsQuery) : Array<number> {
-        return [2,5];
-    }
-    public count(query: AnnouncementsQuery) : number {
-        return 2;
+    public async find(query: AnnouncementsQuery) : Promise<number[]> {
+        return await post('/api/announcements/search.php', { query: query.toStringQuery() });
     }
 }
 export default AnnouncementsModule.instance;

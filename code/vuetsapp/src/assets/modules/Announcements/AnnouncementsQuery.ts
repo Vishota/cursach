@@ -16,35 +16,34 @@ class AnnouncementsQuery {
     private _pricemax?: number;
     private _owner?: number;
     
-    setPriceMin(v: number|undefined) {
+    setPriceMin(v: number|undefined) : AnnouncementsQuery {
         this._pricemin = v;
         return this;
     }
-    setPriceMax(v: number|undefined) {
+    setPriceMax(v: number|undefined) : AnnouncementsQuery {
         this._pricemax = v;
         return this;
     }
-    setLimit(v: number|undefined) {
+    setLimit(v: number|undefined) : AnnouncementsQuery {
         this._limit = v;
         return this;
     }
-    setSort(sort : string) {
+    setSort(sort : string) : AnnouncementsQuery {
         this._sort = sort;
         return this;
     }
-    setOwner(id: number) {
+    setOwner(id: number) : AnnouncementsQuery {
         this._owner = id;
         return this;
     }
 
     toStringQuery() : string {
         var query = '';
-        if(this._limit) query += this._limit + '|';
-        if(this._sort) query += this._sort + '|';
-        if(this._pricemax) query += this._pricemax + '|';
-        if(this._pricemin) query += this._pricemin + '|';
-        if(this._owner) query += this._owner + '|';
-        if(this._sort) query += this._sort;
+        if(this._limit) query += 'limit='+this._limit + '|';
+        if(this._pricemax) query += 'pricemax='+this._pricemax + '|';
+        if(this._pricemin) query += 'pricemin='+this._pricemin + '|';
+        if(this._owner) query += 'owner='+this._owner + '|';
+        if(this._sort) query += 'sort='+this._sort;
         return query;
     }
 }

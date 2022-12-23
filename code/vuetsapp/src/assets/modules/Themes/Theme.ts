@@ -1,7 +1,5 @@
-import type ModuleObject from "../_abstract/ModuleObject";
-
 export default 
-class Theme implements ModuleObject {
+class Theme {
     public get path(): string {
         return this._path;
     }

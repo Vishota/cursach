@@ -1,15 +1,15 @@
 import SingletonDuplicationError from "../Errors/SingletonDuplicationError";
 
-/*delete export then*/export class UsersApi {
-    private static _instance : UsersApi;
-    static get instance() : UsersApi {
+/*delete export then*/export class ProfilesApi {
+    private static _instance : ProfilesApi;
+    static get instance() : ProfilesApi {
         if(this._instance === undefined)
-            this._instance = new UsersApi();
+            this._instance = new ProfilesApi();
         return this._instance;
     }
     private constructor() {
-        if(UsersApi._instance !== undefined)
-            throw new SingletonDuplicationError('"UsersApi" duplication');
+        if(ProfilesApi._instance !== undefined)
+            throw new SingletonDuplicationError('"ProfilesApi" duplication');
     }
 
     async getLogin(id : number) : Promise<string> {
@@ -22,4 +22,4 @@ import SingletonDuplicationError from "../Errors/SingletonDuplicationError";
         return 'Минск, Беларусь'
     }
 }
-export default UsersApi.instance;
+export default ProfilesApi.instance;

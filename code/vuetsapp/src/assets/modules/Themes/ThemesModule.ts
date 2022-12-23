@@ -1,9 +1,8 @@
 import Theme from './Theme';
 import SingletonDuplicationError from '../Errors/SingletonDuplicationError';
 import * as cookie from '../cookie'
-import type Module from '../_abstract/Module';
 
-/*delete export then*/export class ThemesModule implements Module {
+/*delete export then*/export class ThemesModule {
     private static _instance: ThemesModule;
     public static get instance() {
         if(this._instance === undefined) {

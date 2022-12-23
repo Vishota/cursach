@@ -1,10 +1,12 @@
 <script setup lang="ts">
     import HeaderMenu from './HeaderMenu.vue';
+import HeaderSearch from './HeaderSearch.vue';
 </script>
 <template>
     <div class="pagewidth pagepadding"></div>
     <header class="pagewidth pagepadding spacebetween">
         <RouterLink to="/" class="sitename">CURSACH</RouterLink>
+        <HeaderSearch />
         <HeaderMenu />
     </header>
 </template>

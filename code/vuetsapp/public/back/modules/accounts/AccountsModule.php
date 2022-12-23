@@ -30,7 +30,7 @@ class AccountsModule {
         return (CursachDatabase::getInstance()->request('SELECT id FROM accounts WHERE email = ?', [$email])->rowCount() === 0);
     }
     function isUsernameAvailable(string $username) {
-        return (CursachDatabase::getInstance()->request('SELECT id FROM profiles WHERE username = ?', [$username])->rowCount() === 0);
+        return (CursachDatabase::getInstance()->request('SELECT account_id FROM profiles WHERE username = ?', [$username])->rowCount() === 0);
     }
     function isUsernameAllowed(string $username) {
         return preg_match('/[a-zA-Z0-9_]{4,16}/', $username) !== 0;

@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import announcements from '@/assets/modules/Announcements/AnnouncementsModule';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,7 +16,17 @@ const router = createRouter({
     {
       path: '/profiles/:id',
       name: 'profile',
-      component: () => import('../views/UserView.vue')
+      component: () => import('../views/ProfileView.vue')
+    },
+    {
+      path: '/search/:text',
+      name: 'search',
+      component: () => import('../views/SearchView.vue')
+    },
+    {
+      path: '/search',
+      name: 'searchblank',
+      component: () => import('../views/SearchView.vue')
     }
   ]
 })

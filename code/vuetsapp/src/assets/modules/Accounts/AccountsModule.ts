@@ -1,8 +1,7 @@
 import SingletonDuplicationError from '../Errors/SingletonDuplicationError';
 import * as ajax from "../ajax";
-import type Module from "../_abstract/Module";
 
-/*delete export then*/export class AccountsModule implements Module {
+/*delete export then*/export class AccountsModule {
     private static _instance : AccountsModule;
     public static get instance() : AccountsModule {
         if(this._instance === undefined) {

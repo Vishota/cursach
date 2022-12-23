@@ -1,7 +1,7 @@
-import users from "./UsersApi";
+import users from "./ProfilesApi";
 
 export default
-class User {
+class Profile {
     private readonly _id: number;
     private _login?: string;
     private _pic?: string;

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     import announcements from '@/assets/modules/Announcements/AnnouncementsModule';
-    import UserLink from '@/components/users/UserLink.vue';
+    import ProfileLink from '@/components/users/ProfileLink.vue';
     import { ref, reactive } from 'vue';
     import { useRoute } from 'vue-router';
     import GalleryComponent from '@/components/GalleryComponent.vue';
@@ -17,7 +17,7 @@
             <div class="vertflex">
                 <h1 class="userselect">{{announcement.title}}</h1>
                 <p class="userselect"></p>
-                <UserLink id="1"/>
+                <ProfileLink id="1"/>
                 <h3>{{announcement.price}}</h3>
             </div>
         </div>

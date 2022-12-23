@@ -14,18 +14,20 @@
             <div class="gallery-container">
                 <GalleryComponent :pics="announcement.pics" class="gallery" openable />
             </div>
-            <div class="vertflex">
+            <div class="vertflex scrolledy">
                 <h1 class="userselect">{{announcement.title}}</h1>
-                <p class="userselect"></p>
+                <div class="scrolledy">
+                    <p class="userselect">{{announcement.description}}</p>
+                </div>
                 <ProfileLink id="1"/>
-                <h3>{{announcement.price}}</h3>
+                <h3>{{announcement.price}} BYN</h3>
             </div>
         </div>
         <div class="block">
             <table class="features userselect">
-                <tr v-for="feature in announcement.features">
-                    <td>{{feature.name}}</td>
-                    <td>{{feature.value}}</td>
+                <tr v-for="feature, value in announcement.features">
+                    <td>{{feature}}</td>
+                    <td>{{value}}</td>
                 </tr>
             </table>
         </div>
@@ -39,7 +41,7 @@
     .upper.block {
         display: grid;
         grid-template-columns: 2fr 1fr;
-        height: fit-content;
+        height: 400px;
         gap: var(--s-base-indent);
     }
     .gallery {

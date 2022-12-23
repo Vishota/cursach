@@ -15,6 +15,7 @@ class AnnouncementsQuery {
     private _pricemin?: number;
     private _pricemax?: number;
     private _owner?: number;
+    private _text?: string;
     
     setPriceMin(v: number|undefined) : AnnouncementsQuery {
         this._pricemin = v;
@@ -36,6 +37,10 @@ class AnnouncementsQuery {
         this._owner = id;
         return this;
     }
+    setText(text: string) : AnnouncementsQuery {
+        this._text = text;
+        return this;
+    }
 
     toStringQuery() : string {
         var query = '';
@@ -43,7 +48,8 @@ class AnnouncementsQuery {
         if(this._pricemax) query += 'pricemax='+this._pricemax + '|';
         if(this._pricemin) query += 'pricemin='+this._pricemin + '|';
         if(this._owner) query += 'owner='+this._owner + '|';
-        if(this._sort) query += 'sort='+this._sort;
+        if(this._sort) query += 'sort='+this._sort + '|';
+        if(this._text) query += 'text='+this._text;
         return query;
     }
 }

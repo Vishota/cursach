@@ -19,9 +19,9 @@
 </template>
 <style scoped>
     .gallery {
-        height: 40%;
         width: 100%;
         border-radius: var(--s-border-radius);
+        height: 50%;
     }
     .container {
         display: flex;
@@ -36,7 +36,7 @@
         border: 1px solid transparent;
     }
     .container:hover .title, .container:hover .price {
-        color: var(--c-accent)
+        color: var(--c-accent);
     }
     .title {
         margin: var(--s-base-indent) 0;
@@ -46,7 +46,7 @@
     .description {
         margin: 0;
         flex: 1;
-        height: 0;
+        height: 50%;
         overflow: hidden;
     }
     .price {

@@ -20,7 +20,7 @@ import { post } from "../ajax"
     async getDescription(id : number) : Promise<string> {
         return (await post('/api/announcements/description.php', {id})).description;
     }
-    async getPics(id: number) : Promise<Array<string>> {
+    async getPics(id: number) : Promise<string> {
         return (await post('/api/announcements/pics.php', {id})).pics;
     }
     async getPrice(id: number) : Promise<string> {

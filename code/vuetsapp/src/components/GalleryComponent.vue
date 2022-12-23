@@ -28,7 +28,7 @@
 </script>
 <template>
     <div>
-        <img class="pointer" loading="lazy" @click="onClick" @mousemove="updateShownImage" v-show="i == shown" v-for="pic, i in pics" :src="pics.at(i)">
+        <img class="pointer" loading="lazy" @click="onClick" @mousemove="updateShownImage" v-show="i == shown" v-for="pic, i in pics" :src="pic">
     </div>
 </template>
 <style scoped>

@@ -1,5 +1,5 @@
 import api from './AnnouncemetsApi';
-import AnnouncementFeature from './AnnouncementFeature';
+import type AnnouncementFeature from './AnnouncementFeature';
 
 export default
 class Announcement {
@@ -27,7 +27,7 @@ class Announcement {
         if(this._pics === undefined) {
             api.getPics(this._id)
                 .then(pics => {
-                    this._pics = pics;
+                    this._pics = JSON.parse(pics);
                 })
         }
         return this._pics as Array<string>;
@@ -54,10 +54,8 @@ class Announcement {
         if(this._features === undefined) {
             this._features = [];
             api.getFeatures(this._id)
-                .then((arr:Array<any>) => {
-                    arr.forEach(el => {
-                        this._features?.push(new AnnouncementFeature(el.name, el.value))
-                    });
+                .then((arr) => {
+                    this._features = JSON.parse(arr);
                 })
         }
         return this._features;

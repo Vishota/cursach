@@ -3,6 +3,8 @@ require_once __DIR__.'/../../common/singleton/SingletonTrait.php';
 require_once __DIR__.'/../../main/CursachDatabase.php';
 
 class AccountsModule {
+    const TOKEN_LENGTH = 30, TOKEN_SYMBOLS = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890';
+
     use SingletonTrait;
 
     function emailSignUp(string $username, string $password, string $email) { // : int|bool (available in php 8.0)
@@ -26,11 +28,42 @@ class AccountsModule {
         return $id;
     }
 
+    function emailSignIn(string $email, string $password) {
+        $hashRequestResult = CursachDatabase::getInstance()
+            ->request('SELECT id, password_hash FROM accounts WHERE email = ?', [$email]);
+        if($hashRequestResult->rowCount() == 0) return false;
+        $hash = $hashRequestResult
+            ->response()[0]['password_hash'];
+        return (password_verify($password, $hash) ? $hashRequestResult->response()[0]['id'] : false);
+    }
+    
+    function issueToken(int $id) {
+        $code = '';
+        for($i = 0; $i < self::TOKEN_LENGTH; $i++) {
+            $code .= self::TOKEN_SYMBOLS[rand(0, strlen(self::TOKEN_SYMBOLS) - 1)];
+        }
+        setcookie('id', $id, ['expires' => time() + strtotime('+1 year'), 'path' => '/']);
+        setcookie('token', $code, ['expires' => time() + strtotime('+1 year'), 'path' => '/']);
+        CursachDatabase::getInstance()
+            ->request('INSERT INTO tokens (account_id, token) VALUES (?,?)', [$id, $code]);
+    }
+    function checkToken() {
+        $id = $_COOKIE['id'];
+        $token = $_COOKIE['token'];
+        return CursachDatabase::getInstance()
+            ->request('SELECT * FROM tokens WHERE id = ? && token = ?', [$id, $token])
+            ->rowCount() !== 0;
+    }
+
     function isEmailAvailable(string $email) {
-        return (CursachDatabase::getInstance()->request('SELECT id FROM accounts WHERE email = ?', [$email])->rowCount() === 0);
+        return CursachDatabase::getInstance()
+            ->request('SELECT id FROM accounts WHERE email = ?', [$email])
+            ->rowCount() === 0;
     }
     function isUsernameAvailable(string $username) {
-        return (CursachDatabase::getInstance()->request('SELECT account_id FROM profiles WHERE username = ?', [$username])->rowCount() === 0);
+        return CursachDatabase::getInstance()
+            ->request('SELECT account_id FROM profiles WHERE username = ?', [$username])
+            ->rowCount() === 0;
     }
     function isUsernameAllowed(string $username) {
         return preg_match('/[a-zA-Z0-9_]{4,16}/', $username) !== 0;

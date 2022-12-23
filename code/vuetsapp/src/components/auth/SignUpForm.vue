@@ -140,23 +140,23 @@
             </div>
         </div>
         <div class="vertflex" v-show="type === 'email'">
-            <input @input="updateInputsOkay(); onEmailInput()" placeholder="Email" class="in" id="email" @keypress.enter="sendEmailCode" :disabled="emailCodeStatus === 2">
+            <input @input="onEmailInput()" placeholder="Email" class="in" id="email" @keypress.enter="sendEmailCode" :disabled="emailCodeStatus === 2">
             <p class="errmsg" v-show="emailCodeStatus === -1">Код не отправлен, проверьте корректность данных</p>
             <p class="errmsg" v-show="isEmailTaken">Этот email уже занят. Попробуйте войти</p>
 
-            <input @input="updateInputsOkay" id="emailcode" placeholder="Отправленный вам код" @keypress.enter="checkEmailCode" class="in" v-show="emailCodeStatus === 1" :type=" emailCodeStatus === 1 ? 'text' : 'hidden' " pattern="[a-zA-Z0-9]{8}">
+            <input @input="" id="emailcode" placeholder="Отправленный вам код" @keypress.enter="checkEmailCode" class="in" v-show="emailCodeStatus === 1" :type=" emailCodeStatus === 1 ? 'text' : 'hidden' " pattern="[a-zA-Z0-9]{8}">
             <p class="errmsg" v-show="showBadEmailCode">Код введен неверно</p>
             <button class="butaccent" @click="checkEmailCode" v-show="emailCodeStatus === 1">Проверить код</button>
             <button :class="(emailCodeStatus === 1 ? 'butregular' : 'butaccent')" @click="sendEmailCode" v-show="emailCodeStatus < 2" :disabled="sendingLocked || isEmailTaken">Получить код {{ (emailCodeStatus === 1 ? ' еще раз' : '') }}</button>
         </div>
         <div class="vertflex" v-show="showUsernamePasswordInputs">
-            <input @input="updateInputsOkay();" placeholder="Отображаемый никнейм" class="in" id="username" pattern="[a-zA-Z0-9_]{4,16}" @focusin="showUsernameHint = true" @focusout="showUsernameHint = false">
+            <input placeholder="Отображаемый никнейм" class="in" id="username" pattern="[a-zA-Z0-9_]{4,16}" @focusin="showUsernameHint = true" @focusout="showUsernameHint = false">
             <p class="errmsg" v-show="showUsernameTaken">Это имя пользователя занято. Попробуйте другое</p>
             <p class="hint" v-show="showUsernameHint">От 4 до 16 символов. Допускается использование цифр, английских букв и нижнего подчеркивания "_".</p>
-            <input @input="updateInputsOkay(); updatePasswordsMatch()" placeholder="Пароль" class="in" id="password" pattern="[a-zA-Z0-9!@#$%^&*()_+=\-.]{8,32}" @focusin="showPasswordHint = true" @focusout="showPasswordHint = false" @keypress.enter="signUp" type="password">
-            <input @input="updateInputsOkay(); updatePasswordsMatch()" placeholder="Пароль, еще раз" :class="'in'" id="password_repeat" pattern="[a-zA-Z0-9!@#$%^&*()_+=\-.]{8,32}" @focusin="showPasswordHint = true" @focusout="showPasswordHint = false" @keypress.enter="signUp" type="password">
+            <input @input="updatePasswordsMatch()" placeholder="Пароль" class="in" id="password" pattern="[a-zA-Z0-9!@#$%^&*()_+=\-.]{8,32}" @focusin="showPasswordHint = true" @focusout="showPasswordHint = false" @keypress.enter="signUp" type="password">
+            <input @input="updatePasswordsMatch()" placeholder="Пароль, еще раз" :class="'in'" id="password_repeat" pattern="[a-zA-Z0-9!@#$%^&*()_+=\-.]{8,32}" @focusin="showPasswordHint = true" @focusout="showPasswordHint = false" @keypress.enter="signUp" type="password">
             <p class="hint" v-show="showPasswordHint">От 8 до 32 символов. Допускается использование цифр, английских букв и символов !@#$%^&*()_+=-.</p>
-            <button class="butaccent" @click="signUp" :disabled="!inputsOkay">Создать аккаунт</button>
+            <button class="butaccent" @click="signUp">Создать аккаунт</button>
         </div>
         <button class="butregular" @click="openSignInWindow">Хочу войти</button>
     </div>

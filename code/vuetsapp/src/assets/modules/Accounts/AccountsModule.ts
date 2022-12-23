@@ -25,6 +25,9 @@ import * as ajax from "../ajax";
     public async checkEmailAvailability(email: string) {
         return await ajax.post('/api/auth/email/checkemail.php', {email});
     }
+    public async emailSignIn(email: string, password: string) {
+        return await ajax.post('/api/auth/email/signin.php', {email, password});
+    }
 }
 
 export default AccountsModule.instance;

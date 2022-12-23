@@ -20,7 +20,6 @@
                 <div class="gallery-container">
                     <GalleryComponent :pics="[user.pic]" class="gallery" openable />
                 </div>
-                <button class="butaccent">Связаться</button>
                 <button class="butregular">Пожаловаться</button>
             </div>
         </div>

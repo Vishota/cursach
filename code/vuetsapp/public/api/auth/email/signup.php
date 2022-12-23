@@ -41,6 +41,7 @@
         
         $return['account'] = AccountsModule::getInstance()->emailSignUp($username, $password, $email);
 
+        if($return['account'] !== false) AccountsModule::getInstance()->issueToken($return['account']);
         $return['status'] = true;
     }
     catch (Throwable $e) {
@@ -48,3 +49,5 @@
         $return['thrown'] = $e->__toString();
     }
     echo json_encode($return);
+
+    

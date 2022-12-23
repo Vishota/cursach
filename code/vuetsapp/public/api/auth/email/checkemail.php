@@ -1,11 +1,11 @@
 <?php
 try {
-    require_once __DIR__.'/../../../back/modules/accounts/AccountsModule.php';
+    require_once __DIR__.'/../../../back/modules/accounts/UsersModule.php';
     require_once __DIR__.'/../../../back/main/CursachEmailVerifier.php';
 
     $return = [];
 
-    $return['available'] = AccountsModule::getInstance()->isEmailAvailable($_POST['email']);
+    $return['available'] = UsersModule::getInstance()->isEmailAvailable($_POST['email']);
 }
 catch (Throwable $e) {
     $return['status'] = false;

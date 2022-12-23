@@ -1,7 +1,7 @@
 <?php
     $return = [];
     try {
-        require_once __DIR__.'/../../../back/modules/accounts/AccountsModule.php';
+        require_once __DIR__.'/../../../back/modules/accounts/UsersModule.php';
         require_once __DIR__.'/../../../back/main/CursachEmailVerifier.php';
 
         // $_POST['email'] = 'vishotax3@gmail.com';
@@ -17,15 +17,15 @@
         $code = $_POST['code'];
         $email = $_POST['email'];
         
-        if(! AccountsModule::getInstance()->isUsernameAllowed($username)) exit;
-        if(! AccountsModule::getInstance()->isPasswordAllowed($password)) exit;
+        if(! UsersModule::getInstance()->isUsernameAllowed($username)) exit;
+        if(! UsersModule::getInstance()->isPasswordAllowed($password)) exit;
 
-        if(! AccountsModule::getInstance()->isEmailAvailable($email)) {
+        if(! UsersModule::getInstance()->isEmailAvailable($email)) {
             $return['email'] = false;
             echo json_encode($return);
             exit;
         }
-        if(! AccountsModule::getInstance()->isUsernameAvailable($username)) {
+        if(! UsersModule::getInstance()->isUsernameAvailable($username)) {
             $return['username'] = false;
             echo json_encode($return);
             exit;
@@ -39,9 +39,9 @@
             exit;
         }
         
-        $return['account'] = AccountsModule::getInstance()->emailSignUp($username, $password, $email);
+        $return['account'] = UsersModule::getInstance()->emailSignUp($username, $password, $email);
 
-        if($return['account'] !== false) AccountsModule::getInstance()->issueToken($return['account']);
+        if($return['account'] !== false) UsersModule::getInstance()->issueToken($return['account']);
         $return['status'] = true;
     }
     catch (Throwable $e) {

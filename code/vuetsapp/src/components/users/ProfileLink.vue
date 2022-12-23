@@ -7,5 +7,5 @@
     var user = reactive(users.get(props.id));
 </script>
 <template>
-    <RouterLink :to="'/profiles/'+id">{{user.login}}</RouterLink>
+    <RouterLink :to="'/profiles/'+id">{{user.username}}</RouterLink>
 </template>

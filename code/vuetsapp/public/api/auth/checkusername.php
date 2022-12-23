@@ -1,10 +1,10 @@
 <?php
 try {
-    require_once __DIR__.'/../../back/modules/accounts/AccountsModule.php';
+    require_once __DIR__.'/../../back/modules/accounts/UsersModule.php';
 
     $return = [];
 
-    $return['available'] = AccountsModule::getInstance()->isUsernameAvailable($_POST['username']);
+    $return['available'] = UsersModule::getInstance()->isUsernameAvailable($_POST['username']);
     $return['status'] = true;
 }
 catch (Throwable $e) {

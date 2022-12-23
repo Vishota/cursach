@@ -7,20 +7,18 @@
 
     var id = ref(parseInt(useRoute().params.id as string));
     var user = reactive(users.get(id.value));
-    
 </script>
 <template>
     <div class="vertflex">
         <div class="upper block">
             <div class="vertflex">
                 <h2><ProfileLink :id="id"/></h2>
-                <p>Город: {{user.city}}</p>
             </div>
             <div class="vertflex">
                 <div class="gallery-container">
-                    <GalleryComponent :pics="[user.pic]" class="gallery" openable />
+                    <GalleryComponent :pics="[ user.pic ]" class="gallery" openable />
                 </div>
-                <button class="butregular">Пожаловаться</button>
+                <button class="butregular">Настройки</button>
             </div>
         </div>
         <div class="block">

@@ -3,9 +3,8 @@ import users from "./ProfilesApi";
 export default
 class Profile {
     private readonly _id: number;
-    private _login?: string;
+    private _username?: string;
     private _pic?: string;
-    private _city?: string;
 
     constructor(id: number) {
         this._id = id;
@@ -14,14 +13,14 @@ class Profile {
     get id() : number|undefined {
         return this._id;
     }
-    get login() : string {
-        if(this._login === undefined) {
-            users.getLogin(this._id)
-            .then(login => {
-                this._login = login;
-            })
+    get username() : string {
+        if(this._username=== undefined) {
+            users.getUsername(this._id)
+                .then(username=> {
+                    this._username = username;
+                })
         }
-        return this._login as string;
+        return this._username as string;
     }
     get pic() : string {
         if(this._pic === undefined) {
@@ -31,20 +30,5 @@ class Profile {
                 })
         }
         return this._pic as string;
-    }
-    get city() : string {
-        if(this._city === undefined) {
-            users.getCity(this._id)
-                .then(city => {
-                    this._city = city;
-                })
-        }
-        return this._city as string;
-    }
-    fullInit() {
-        this.id;
-        this.login;
-        this.pic;
-        this.city;
     }
 }

@@ -1,4 +1,5 @@
 import SingletonDuplicationError from "../Errors/SingletonDuplicationError";
+import * as ajax from "../ajax";
 
 /*delete export then*/export class ProfilesApi {
     private static _instance : ProfilesApi;
@@ -12,14 +13,11 @@ import SingletonDuplicationError from "../Errors/SingletonDuplicationError";
             throw new SingletonDuplicationError('"ProfilesApi" duplication');
     }
 
-    async getLogin(id : number) : Promise<string> {
-        return 'testlogin' + id;
+    async getUsername(id : number) {
+        return (await ajax.post('/api/profiles/username.php', { id })).username;
     }
     async getPic(id: number) {
-        return 'https://www.meme-arsenal.com/memes/ce3dd0d28f702bd9fb6c533e2cbe4b37.jpg';
-    }
-    async getCity(id: number) {
-        return 'Минск, Беларусь'
+        return (await ajax.post('/api/profiles/pic.php', { id })).picture;
     }
 }
 export default ProfilesApi.instance;

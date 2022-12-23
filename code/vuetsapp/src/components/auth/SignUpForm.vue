@@ -1,7 +1,7 @@
 <script lang="ts" setup>
     import { openSignInWindow } from '@/assets/authwindows';
     import { closeWindow } from '@/assets/authwindows';
-    import accounts from '@/assets/modules/Accounts/AccountsModule'
+    import profiles from '@/assets/modules/Accounts/AccountsModule'
     import { ref } from 'vue';
     import router from '@/router/index';
     
@@ -41,7 +41,7 @@
         try {
             showBadEmailCode.value = false;
             var emailin = document.querySelector('#email') as HTMLInputElement;
-            var sent = await accounts.sendEmailCode( emailin.value );
+            var sent = await profiles.sendEmailCode( emailin.value );
             if(sent.status && sent.sent) {
                 emailCodeStatus.value = 1;
             }
@@ -59,7 +59,7 @@
         var emailin = document.querySelector('#email') as HTMLInputElement;
         var codein = document.querySelector('#emailcode') as HTMLInputElement;
 
-        var checked = await accounts.checkEmailCode( emailin.value, codein.value );
+        var checked = await profiles.checkEmailCode( emailin.value, codein.value );
         if(checked.status && checked.code) {
             emailCodeStatus.value = 2;
             showUsernamePasswordInputs.value = true;
@@ -75,7 +75,7 @@
         var usernamein = document.querySelector('#username') as HTMLInputElement;
         var passwordin = document.querySelector('#password') as HTMLInputElement;
 
-        var signedUp = await accounts.emailSignUp(emailin.value, codein.value, usernamein.value, passwordin.value);
+        var signedUp = await profiles.emailSignUp(emailin.value, codein.value, usernamein.value, passwordin.value);
 
         if(signedUp.code === false) {
             resetEmailSignup();
@@ -98,20 +98,12 @@
     async function onEmailInput() {
         var emailin = document.querySelector('#email') as HTMLInputElement;
 
-        isEmailTaken.value = !(await accounts.checkEmailAvailability(emailin.value)).available;
+        isEmailTaken.value = !(await profiles.checkEmailAvailability(emailin.value)).available;
 
         emailCodeStatus.value = 0;
         showBadEmailCode.value = false;
         console.log(isEmailTaken.value);
     }
-    /*async function onUsernameInput() {
-        var usernamein = document.querySelector('#username') as HTMLInputElement;
-
-        isEmailTaken.value = !(await accounts.checkEmailAvailability(usernamein.value)).available;
-
-        emailCodeStatus.value = 0;
-        showBadEmailCode.value = false;
-    }*/
     function updatePasswordsMatch() {
         var passwordin = document.querySelector('#password') as HTMLInputElement;
         var passwordrepeatin = document.querySelector('#password_repeat') as HTMLInputElement;
@@ -144,7 +136,7 @@
             <p class="errmsg" v-show="emailCodeStatus === -1">Код не отправлен, проверьте корректность данных</p>
             <p class="errmsg" v-show="isEmailTaken">Этот email уже занят. Попробуйте войти</p>
 
-            <input @input="" id="emailcode" placeholder="Отправленный вам код" @keypress.enter="checkEmailCode" class="in" v-show="emailCodeStatus === 1" :type=" emailCodeStatus === 1 ? 'text' : 'hidden' " pattern="[a-zA-Z0-9]{8}">
+            <input id="emailcode" placeholder="Отправленный вам код" @keypress.enter="checkEmailCode" class="in" v-show="emailCodeStatus === 1" :type=" emailCodeStatus === 1 ? 'text' : 'hidden' " pattern="[a-zA-Z0-9]{8}">
             <p class="errmsg" v-show="showBadEmailCode">Код введен неверно</p>
             <button class="butaccent" @click="checkEmailCode" v-show="emailCodeStatus === 1">Проверить код</button>
             <button :class="(emailCodeStatus === 1 ? 'butregular' : 'butaccent')" @click="sendEmailCode" v-show="emailCodeStatus < 2" :disabled="sendingLocked || isEmailTaken">Получить код {{ (emailCodeStatus === 1 ? ' еще раз' : '') }}</button>

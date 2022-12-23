@@ -2,13 +2,12 @@
 require_once __DIR__.'/../../common/singleton/SingletonTrait.php';
 require_once __DIR__.'/../../main/CursachDatabase.php';
 
-class AccountsModule {
+class UsersModule {
     const TOKEN_LENGTH = 30, TOKEN_SYMBOLS = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890';
 
     use SingletonTrait;
 
     function emailSignUp(string $username, string $password, string $email) { // : int|bool (available in php 8.0)
-        
         CursachDatabase::getInstance()->beginTransaction();
         $accountInsert = CursachDatabase::getInstance()->request('INSERT INTO accounts (email, password_hash) VALUES (:email, :password_hash)',
             [ 'email' => $email, 'password_hash' => password_hash($password, null) ]);
@@ -70,5 +69,16 @@ class AccountsModule {
     }
     function isPasswordAllowed(string $username) {
         return preg_match('/[a-zA-Z0-9!@#$%^&*()_+=\-.]{8,32}/', $username) !== 0;
+    }
+
+    function getUsername(int $id) {
+        return CursachDatabase::getInstance()
+            ->request('SELECT username FROM profiles WHERE account_id = ?', [$id], PDO::FETCH_NUM)
+            ->response()[0];
+    }
+    function getPicture(int $id) {
+        return CursachDatabase::getInstance()
+            ->request('SELECT picture FROM profiles WHERE account_id = ?', [$id], PDO::FETCH_NUM)
+            ->response()[0];
     }
 }

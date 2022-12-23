@@ -1,16 +1,18 @@
 import SingletonDuplicationError from '../Errors/SingletonDuplicationError';
 import * as ajax from "../ajax";
+import * as cookie from "../cookie"
 
-/*delete export then*/export class AccountsModule {
-    private static _instance : AccountsModule;
-    public static get instance() : AccountsModule {
+/*delete export then*/export class UsersModule {
+    private static _instance : UsersModule;
+
+    public static get instance() : UsersModule {
         if(this._instance === undefined) {
-            this._instance = new AccountsModule();
+            this._instance = new UsersModule();
         }
         return this._instance;
     }
     private constructor() {
-        if(AccountsModule._instance !== undefined) throw new SingletonDuplicationError('AccountsModule duplication');
+        if(UsersModule._instance !== undefined) throw new SingletonDuplicationError('UsersModule duplication');
     }
     
     public async sendEmailCode(email: string) {
@@ -28,6 +30,13 @@ import * as ajax from "../ajax";
     public async emailSignIn(email: string, password: string) {
         return await ajax.post('/api/auth/email/signin.php', {email, password});
     }
+    public getMyId() : number|null {
+        return cookie.getCookie('id') !== null ? parseInt(cookie.getCookie('id') as string) : null;
+    }
+    public logout() {
+        cookie.eraseCookie('id');
+        cookie.eraseCookie('token');
+    }
 }
 
-export default AccountsModule.instance;
+export default UsersModule.instance;

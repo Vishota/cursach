@@ -1,12 +1,13 @@
 <script lang="ts" setup>
-    import users from '@/assets/modules/Profiles/ProfilesModule';
+    import profiles from '@/assets/modules/Profiles/ProfilesModule';
+    import accounts from '@/assets/modules/Accounts/AccountsModule';
     import ProfileLink from '@/components/users/ProfileLink.vue';
     import { ref, reactive } from 'vue';
     import { useRoute } from 'vue-router';
     import GalleryComponent from '@/components/GalleryComponent.vue';
 
     var id = ref(parseInt(useRoute().params.id as string));
-    var user = reactive(users.get(id.value));
+    var user = reactive(profiles.get(id.value));
 </script>
 <template>
     <div class="vertflex">
@@ -18,7 +19,7 @@
                 <div class="gallery-container">
                     <GalleryComponent :pics="[ user.pic ]" class="gallery" openable />
                 </div>
-                <button class="butregular">Настройки</button>
+                <button class="butregular" v-if="accounts.getMyId() === id">Настройки</button>
             </div>
         </div>
         <div class="block">

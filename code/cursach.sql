@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Дек 23 2022 г., 04:35
+-- Время создания: Дек 23 2022 г., 05:00
 -- Версия сервера: 8.0.29
 -- Версия PHP: 7.4.30
 
@@ -108,6 +108,13 @@ CREATE TABLE `tokens` (
   `token` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
   `issued` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Дамп данных таблицы `tokens`
+--
+
+INSERT INTO `tokens` (`account_id`, `token`, `issued`) VALUES
+(18, 'iZiGPg2jkVliVcZkJn5nQC6Nrn8I2x', '2022-12-23 07:57:37');
 
 --
 -- Индексы сохранённых таблиц

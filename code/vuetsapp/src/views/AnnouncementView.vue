@@ -7,6 +7,8 @@
 
     var id = ref(parseInt(useRoute().params.id as string));
     var announcement = reactive(announcements.get(id.value));
+    console.log(announcement.owner);
+    
 </script>
 <template>
     <div class="vertflex">
@@ -19,15 +21,15 @@
                 <div class="scrolledy">
                     <p class="userselect">{{announcement.description}}</p>
                 </div>
-                <ProfileLink id="1"/>
+                <ProfileLink :id="announcement.owner"/>
                 <h3>{{announcement.price}} BYN</h3>
             </div>
         </div>
         <div class="block">
             <table class="features userselect">
-                <tr v-for="feature, value in announcement.features">
-                    <td>{{feature}}</td>
-                    <td>{{value}}</td>
+                <tr v-for="feature in announcement.features">
+                    <td>{{(feature as any).left}}</td>
+                    <td>{{(feature as any).right}}</td>
                 </tr>
             </table>
         </div>

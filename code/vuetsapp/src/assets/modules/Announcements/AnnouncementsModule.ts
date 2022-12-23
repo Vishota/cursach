@@ -21,6 +21,8 @@ import { post } from '@/assets/modules/ajax'
     public async find(query: AnnouncementsQuery) : Promise<number[]> {
         return await post('/api/announcements/search.php', { query: query.toStringQuery() });
     }
+    public async create(info : object) {
+        return await post('/api/announcements/create.php', info);
+    }
 }
 export default AnnouncementsModule.instance;
-

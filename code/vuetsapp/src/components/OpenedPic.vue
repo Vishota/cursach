@@ -126,4 +126,7 @@
         opacity: 1;
         color: var(--c-accent)
     }
+    .container {
+        z-index: 2;
+    }
 </style>

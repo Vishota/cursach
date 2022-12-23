@@ -9,6 +9,7 @@ class Announcement {
     private _pics? : Array<string>;
     private _price? : string;
     private _features? : Array<AnnouncementFeature>;
+    private _owner? : number;
 
     constructor (id:number) {
         this._id = id;
@@ -22,6 +23,16 @@ class Announcement {
                 })
         }
         return this._title as string;
+    }
+    public get owner() : number {
+        if(this._owner === undefined) {
+            api.getOwner(this._id)
+                .then(owner => {
+                    this._owner = owner;
+                    console.log(this._owner);
+                })
+        }
+        return this._owner as number;
     }
     public get pics() : Array<string> {
         if(this._pics === undefined) {

@@ -20,7 +20,7 @@
     .announcements-grid {
         display: grid;
         grid-template-columns: repeat(var(--n-hor-announcements), 1fr);
-        grid-auto-rows: 300px;
+        grid-auto-rows: 400px;
         gap: var(--s-base-indent);
     }
 </style>

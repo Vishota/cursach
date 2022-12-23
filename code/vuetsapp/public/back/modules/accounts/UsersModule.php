@@ -49,8 +49,10 @@ class UsersModule {
     function checkToken() {
         $id = $_COOKIE['id'];
         $token = $_COOKIE['token'];
+        var_dump($id);
+        var_dump($token);
         return CursachDatabase::getInstance()
-            ->request('SELECT * FROM tokens WHERE id = ? && token = ?', [$id, $token])
+            ->request('SELECT * FROM tokens WHERE account_id = ? && token = ?', [$id, $token])
             ->rowCount() !== 0;
     }
 

@@ -17,6 +17,9 @@ import { post } from "../ajax"
     async getTitle(id : number) : Promise<string> {
         return (await post('/api/announcements/title.php', {id})).title;
     }
+    async getOwner(id : number) : Promise<number> {
+        return (await post('/api/announcements/owner.php', {id})).owner;
+    }
     async getDescription(id : number) : Promise<string> {
         return (await post('/api/announcements/description.php', {id})).description;
     }

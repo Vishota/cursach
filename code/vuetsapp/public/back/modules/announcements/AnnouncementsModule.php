@@ -1,6 +1,7 @@
 <?php
     require_once __DIR__.'/../../common/singleton/SingletonTrait.php';
     require_once __DIR__.'/../../main/CursachDatabase.php';
+    require_once __DIR__.'/../accounts/UsersModule.php';
 
     class AnnouncementsModule {
         use SingletonTrait;
@@ -85,6 +86,11 @@
                 ->request('SELECT description FROM announcements WHERE id=?', [$id])
                 ->response()[0]['description'];
         }
+        function getOwner(int $id) : int {
+            return CursachDatabase::getInstance()
+                ->request('SELECT owner_id FROM announcements WHERE id=?', [$id])
+                ->response()[0]['owner_id'];
+        }
         function getFeatures(int $id) : string {
             return CursachDatabase::getInstance()
                 ->request('SELECT features FROM announcements WHERE id=?', [$id])
@@ -100,4 +106,19 @@
                 ->request('SELECT price FROM announcements WHERE id=?', [$id])
                 ->response()[0]['price'];
         }
+
+        function addAnnouncement(int $owner_id, string $title, string $description, int $price, string $featuresJson, string $picturesJson) {
+            return CursachDatabase::getInstance()->request(
+                'INSERT INTO `announcements` (`id`, `owner_id`, `title`, `description`, `price`, `created`, `features`, `pictures`)
+                VALUES (NULL, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?, ?)',
+                [$owner_id, $title, $description, $price, $featuresJson, $picturesJson])
+                    ->lastInsertId();
+        }
+        /*function editAnnouncement(string $title, string $description, int $price, string $featuresJson, string $picturesJson) {
+            return CursachDatabase::getInstance()->request(
+                'INSERT INTO `announcements` (`id`, `owner_id`, `title`, `description`, `price`, `created`, `features`, `pictures`)
+                VALUES (NULL, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?, ?)',
+                [$owner_id, $title, $description, $price, $featuresJson, $picturesJson])
+                    ->lastInsertId();
+        }*/
     }

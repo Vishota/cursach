@@ -16,8 +16,8 @@ class Profile {
     get username() : string {
         if(this._username=== undefined) {
             users.getUsername(this._id)
-                .then(username=> {
-                    this._username = username;
+                .then(r=> {
+                    this._username = r.username;
                 })
         }
         return this._username as string;

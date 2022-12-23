@@ -16,9 +16,13 @@
 
     var creationBlocked = ref(false);
     function createAnnouncement() {
-        console.log(JSON.stringify({
-            'title': title.value, 'description': description.value, 'price': price.value, 'features': features.value, 'pics': pics.value
-        }))
+        announcements.create({
+            'title': title.value,
+            'description': description.value,
+            'price': price.value,
+            'features': JSON.stringify(features.value),
+            'pics': JSON.stringify(pics.value)
+        });
     }
 </script>
 <template>

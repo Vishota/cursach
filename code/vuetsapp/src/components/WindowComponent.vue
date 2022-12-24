@@ -30,6 +30,7 @@ import announcements from '@/assets/modules/Announcements/AnnouncementsModule';
         align-items: center;
         justify-content: center;
         top: 0;left: 0;
+        z-index: 2;
     }
     .content {
         height: fit-content;
@@ -43,6 +44,7 @@ import announcements from '@/assets/modules/Announcements/AnnouncementsModule';
         height: 100vh;
         position: fixed;
         top: 0;left: 0;
+        z-index: 2;
     }
     .window {
         width: min(calc(100vw - 2 * var(--s-base-indent)), 400px);

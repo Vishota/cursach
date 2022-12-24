@@ -18,13 +18,16 @@
         <div class="upper block">
             <div class="vertflex">
                 <h2><ProfileLink :id="id"/></h2>
+                <div v-if="accounts.getMyId() === id">
+                    <a class="hoveraccent" @click="accounts.logout()">Выйти</a>
+                </div>
             </div>
             <div class="vertflex">
                 <div class="gallery-container">
                     <GalleryComponent :pics="[ user.pic ]" class="gallery" openable />
                 </div>
                 <button class="butaccent" v-if="accounts.getMyId() === id" @click="router.push('/new')">Создать объявление</button>
-                <!----<button class="butregular" v-if="accounts.getMyId() === id">Настройки</button>-->
+                <button class="butregular" v-if="accounts.getMyId() === id">Настройки</button>
             </div>
         </div>
         <div class="block">

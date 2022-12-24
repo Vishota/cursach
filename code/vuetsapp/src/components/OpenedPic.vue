@@ -129,4 +129,7 @@
     .container {
         z-index: 2;
     }
+    .container * {
+        z-index: 2;
+    }
 </style>

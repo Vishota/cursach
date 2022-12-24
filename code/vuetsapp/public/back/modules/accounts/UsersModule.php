@@ -12,6 +12,7 @@ class UsersModule {
         $accountInsert = CursachDatabase::getInstance()->request('INSERT INTO accounts (email, password_hash) VALUES (:email, :password_hash)',
             [ 'email' => $email, 'password_hash' => password_hash($password, null) ]);
         if($accountInsert->rowCount() === 0) {
+            echo 321;
             CursachDatabase::getInstance()->rollBack();
             return false;
         }

@@ -28,7 +28,8 @@
 </script>
 <template>
     <div>
-        <img class="pointer" loading="lazy" @click="onClick" @mousemove="updateShownImage" v-show="i == shown" v-for="pic, i in pics" :src="pic">
+        <div class="replacer" v-if="pics.length == 0 || (pics.length == 1 && pics.at(0) == '')">no pic</div>
+        <img class="pointer" v-if="!(pics.length == 1 && pics.at(0) == '')" loading="lazy" @click="onClick" @mousemove="updateShownImage" v-show="i == shown" v-for="pic, i in pics" :src="pic">
     </div>
 </template>
 <style scoped>
@@ -41,6 +42,17 @@
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
+        
+    }
+    .replacer {
+        height: 100%;
+        width: 100%;
+        background-color: var(--c-accent);
+        opacity: .3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: inherit;
     }
     div {
         width: 100%;

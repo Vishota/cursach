@@ -1,5 +1,6 @@
 <script lang="ts" setup>
     import announcements from '@/assets/modules/Announcements/AnnouncementsModule';
+    import accounts from '@/assets/modules/Accounts/AccountsModule';
     import ProfileLink from '@/components/users/ProfileLink.vue';
     import { ref, reactive } from 'vue';
     import { useRoute } from 'vue-router';
@@ -22,6 +23,7 @@
                     <p class="userselect">{{announcement.description}}</p>
                 </div>
                 <ProfileLink :id="announcement.owner"/>
+                <button class="butregular" v-show="announcement.owner == accounts.getMyId()">Редактировать</button>
                 <h3>{{announcement.price}} BYN</h3>
             </div>
         </div>

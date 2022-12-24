@@ -114,11 +114,10 @@
                 [$owner_id, $title, $description, $price, $featuresJson, $picturesJson])
                     ->lastInsertId();
         }
-        /*function editAnnouncement(string $title, string $description, int $price, string $featuresJson, string $picturesJson) {
+        function editAnnouncement(int $id, string $title, string $description, int $price, string $featuresJson, string $picturesJson) {
             return CursachDatabase::getInstance()->request(
-                'INSERT INTO `announcements` (`id`, `owner_id`, `title`, `description`, `price`, `created`, `features`, `pictures`)
-                VALUES (NULL, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?, ?)',
-                [$owner_id, $title, $description, $price, $featuresJson, $picturesJson])
+                'UPDATE `announcements` SET `title` = ?, `description`=?,`price`=?,`features`=?,`pictures`=? WHERE `announcements`.`id` = ?;',
+                [$title, $description, $price, $featuresJson, $picturesJson, $id])
                     ->lastInsertId();
-        }*/
+        }
     }

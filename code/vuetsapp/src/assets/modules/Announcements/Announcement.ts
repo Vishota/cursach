@@ -1,17 +1,13 @@
 import api from './AnnouncemetsApi';
 import type AnnouncementFeature from './AnnouncementFeature';
+import AbstractAnnouncementInfo from './AbstractAnnouncementInfo';
 
 export default
-class Announcement {
+class Announcement extends AbstractAnnouncementInfo {
     private readonly _id : number;
-    private _title? : string;
-    private _description? : string;
-    private _pics? : Array<string>;
-    private _price? : string;
-    private _features? : Array<AnnouncementFeature>;
-    private _owner? : number;
 
     constructor (id:number) {
+        super();
         this._id = id;
     }
 
@@ -70,5 +66,15 @@ class Announcement {
                 })
         }
         return this._features;
+    }
+    
+    public async fullInit() {
+        await Promise.all([
+            this._description,
+            this._features,
+            this._owner,
+            this._pics,
+            this._price,
+            this._title]);
     }
 }

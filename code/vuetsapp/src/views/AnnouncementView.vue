@@ -4,6 +4,7 @@
     import ProfileLink from '@/components/users/ProfileLink.vue';
     import { ref, reactive } from 'vue';
     import { useRoute } from 'vue-router';
+    import router from '@/router';
     import GalleryComponent from '@/components/GalleryComponent.vue';
 
     var id = ref(parseInt(useRoute().params.id as string));
@@ -23,7 +24,7 @@
                     <p class="userselect">{{announcement.description}}</p>
                 </div>
                 <ProfileLink :id="announcement.owner"/>
-                <button class="butregular" v-show="announcement.owner == accounts.getMyId()">Редактировать</button>
+                <button class="butregular" v-show="announcement.owner == accounts.getMyId()" @click="router.push('/announcements/' + id + '/edit')">Редактировать</button>
                 <h3>{{announcement.price}} BYN</h3>
             </div>
         </div>

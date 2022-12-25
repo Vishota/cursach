@@ -65,10 +65,8 @@
             ];
         }
 
-
         function search(string $query) {
             $request = $this->queryToRequest($query);
-            //var_dump($request);
             $requestResult = CursachDatabase::getInstance()->request($request['statement'], $request['params'])->response();
             $ids = [];
             foreach ($requestResult as $key => $value) {
@@ -114,10 +112,43 @@
                 [$owner_id, $title, $description, $price, $featuresJson, $picturesJson])
                     ->lastInsertId();
         }
-        function editAnnouncement(int $id, string $title, string $description, int $price, string $featuresJson, string $picturesJson) {
-            return CursachDatabase::getInstance()->request(
-                'UPDATE `announcements` SET `title` = ?, `description`=?,`price`=?,`features`=?,`pictures`=? WHERE `announcements`.`id` = ?;',
+        function editAnnouncement(int $id, string $title, string $description, int $price, string $featuresJson, string $picturesJson) : bool {
+            if(!$this->canEdit($id)) return false;
+            if(CursachDatabase::getInstance()
+                ->request('UPDATE `announcements` SET `title` = ?, `description`=?,`price`=?,`features`=?,`pictures`=? WHERE `announcements`.`id` = ?;',
                 [$title, $description, $price, $featuresJson, $picturesJson, $id])
-                    ->lastInsertId();
+                ->rowCount() == 0 ) return false;
+            return true;
+        }
+        function deleteAnnouncement(int $id, string $title, string $description, int $price, string $featuresJson, string $picturesJson) : bool {
+            if(!$this->canEdit($id)) return false;
+            if(CursachDatabase::getInstance()
+                ->request('UPDATE `announcements` SET `title` = ?, `description`=?,`price`=?,`features`=?,`pictures`=? WHERE `announcements`.`id` = ?;',
+                [$title, $description, $price, $featuresJson, $picturesJson, $id])
+                ->rowCount() == 0 ) return false;
+            return true;
+        }
+
+        function isOwner(int $id) {
+            return $this->getOwner($id) === UsersModule::getInstance()->getMyId();
+        }
+        function canEdit(int $announcementId) : bool {
+            $userId = UsersModule::getInstance()->getMyId();
+            if($userId === false) return false;
+            if($userId === $this->getOwner($announcementId)) return true;
+            return false;
+        }
+        function canDelete(int $announcementId) : bool {
+            $userId = UsersModule::getInstance()->checkToken();
+            if($userId === false) return false;
+            if($userId === $this->getOwner($announcementId)) return true;
+            return false;
+        }
+        function canGet(int $announcementId) : bool {
+            $userId = UsersModule::getInstance()->checkToken();
+            if(UsersModule::getInstance()->getStatus($userId) == 'BLOCKED') return false;
+            if($userId === $this->getOwner($announcementId)) return true;
+            return false;
         }
     }
+    

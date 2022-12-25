@@ -84,4 +84,8 @@ class UsersModule {
             ->request('SELECT picture FROM profiles WHERE account_id = ?', [$id], PDO::FETCH_NUM)
             ->response()[0];
     }
+    function getMyId() {
+        if($this->checkToken() == false) return false;
+        return $_COOKIE['id'];
+    }
 }

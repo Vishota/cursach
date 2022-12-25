@@ -6,7 +6,7 @@ export default
 class Profile extends LazyObject {
     private readonly _id: number;
     
-    protected properties : Map<string, LazyProperty<any>> = new Map<string, LazyProperty<any>>([
+    protected _properties : Map<string, LazyProperty<any>> = new Map<string, LazyProperty<any>>([
         [ 'username', new LazyProperty<string>(async ()=>{return await users.getUsername(this._id)}) ],
         [ 'pic', new LazyProperty<string>(async ()=>{return await users.getPic(this._id)}) ]
     ]);

@@ -6,7 +6,7 @@ import LazyProperty from '@/assets/classes/Lazy/LazyProperty';
 export default
 class Announcement extends LazyObject {
     private readonly _id : number;
-    protected properties: Map<string, LazyProperty<any>> = new Map<string, LazyProperty<any>>([
+    protected _properties: Map<string, LazyProperty<any>> = new Map<string, LazyProperty<any>>([
         [ 'title', new LazyProperty<string>(async () => { return await api.getTitle(this._id) }) ],
         [ 'description', new LazyProperty<string>(async () => { return await api.getDescription(this._id) }) ],
         [ 'pics', new LazyProperty<string[]>( async () => { return await api.getPics(this._id) } ) ],

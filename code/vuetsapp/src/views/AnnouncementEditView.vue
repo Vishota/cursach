@@ -17,17 +17,7 @@
     var description = ref('');
     var price = ref('');
 
-
     var editBlocked = ref(false);
-    function createAnnouncement() {
-        announcements.create({
-            'title': title.value,
-            'description': description.value,
-            'price': price.value,
-            'features': JSON.stringify(features.value),
-            'pics': JSON.stringify(pics.value)
-        });
-    }
 
     init();
 
@@ -41,6 +31,11 @@
         price.value = await announcement.loadAndGet('price');
 
         loading.value = false;
+    }
+
+    async function save() {
+        console.log(announcement.toObject());
+        
     }
 </script>
 <template>
@@ -67,7 +62,7 @@
         </div>
         <div class="block horflex">
             <input class="in price" placeholder="Цена" v-model="price" :disabled="loading">
-            <button @click="createAnnouncement" class="create-button fullwidth butaccent" :disabled="editBlocked || loading">Сохранить</button>
+            <button @click="save" class="create-button fullwidth butaccent" :disabled="editBlocked || loading">Сохранить</button>
         </div>
     </div>
 </template>

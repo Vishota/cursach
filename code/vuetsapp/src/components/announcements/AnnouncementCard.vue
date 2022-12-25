@@ -10,10 +10,10 @@
 <template>
     <RouterLink :to="'/announcements/'+id">
         <div class="container">
-            <GalleryComponent :pics="announcement.pics" class="gallery" />
-            <h1 class="title">{{ announcement.title }}</h1>
-            <p class="description bottomshading">{{ announcement.description }}</p>
-            <p class="price">{{ announcement.price }} BYN</p>
+            <GalleryComponent :pics="announcement.get('pics')" class="gallery" />
+            <h1 class="title">{{ announcement.get('title') }}</h1>
+            <p class="description bottomshading">{{ announcement.get('description') }}</p>
+            <p class="price">{{ announcement.get('price') }} BYN</p>
         </div>
     </RouterLink>
 </template>

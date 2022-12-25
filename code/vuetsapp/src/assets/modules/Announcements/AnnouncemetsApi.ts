@@ -1,5 +1,6 @@
 import SingletonDuplicationError from "../Errors/SingletonDuplicationError";
 import { post } from "../ajax"
+import AnnouncementFeature from './AnnouncementFeature';
 
 /*delete export then*/export class AnnouncementsApi {
     private static _instance : AnnouncementsApi;
@@ -23,14 +24,19 @@ import { post } from "../ajax"
     async getDescription(id : number) : Promise<string> {
         return (await post('/api/announcements/description.php', {id})).description;
     }
-    async getPics(id: number) : Promise<string> {
-        return (await post('/api/announcements/pics.php', {id})).pics;
+    async getPics(id: number) : Promise<string[]> {
+        return JSON.parse(await post('/api/announcements/pics.php', {id})).pics;
     }
     async getPrice(id: number) : Promise<string> {
         return (await post('/api/announcements/price.php', {id})).price;
     }
-    async getFeatures(id: number) {
-        return (await post('/api/announcements/features.php', {id})).features;
+    async getFeatures(id: number) : Promise<AnnouncementFeature[]> {
+        var featuresObj : any[] = JSON.parse( (await post('/api/announcements/features.php', {id})).features );
+        var features : AnnouncementFeature[] = [];
+        featuresObj.forEach(v=>{
+            features.push( new AnnouncementFeature( v.left, v.right ) );
+        });
+        return features;
     }
 }
 export default AnnouncementsApi.instance;

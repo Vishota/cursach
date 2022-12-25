@@ -8,28 +8,29 @@
 
     var id = ref(parseInt(useRoute().params.id as string));
     var announcement = reactive(announcements.get(id.value));
-    console.log(announcement.owner);
+    console.log(announcement.get('owner'));
     
+    announcement.initAll();
 </script>
 <template>
     <div class="vertflex">
         <div class="upper block">
             <div class="gallery-container">
-                <GalleryComponent :pics="announcement.pics" class="gallery" openable />
+                <GalleryComponent :pics="announcement.get('pics')" class="gallery" openable />
             </div>
             <div class="vertflex scrolledy">
-                <h1 class="userselect">{{announcement.title}}</h1>
+                <h1 class="userselect">{{announcement.get('title')}}</h1>
                 <div class="scrolledy">
-                    <p class="userselect">{{announcement.description}}</p>
+                    <p class="userselect">{{announcement.get('description')}}</p>
                 </div>
-                <ProfileLink :id="announcement.owner"/>
-                <button class="butregular" v-show="announcement.owner == accounts.getMyId()">Редактировать</button>
-                <h3>{{announcement.price}} BYN</h3>
+                <ProfileLink :id="announcement.get('owner')"/>
+                <button class="butregular" v-show="announcement.get('owner') == accounts.getMyId()">Редактировать</button>
+                <h3>{{announcement.get('price')}} BYN</h3>
             </div>
         </div>
         <div class="block">
             <table class="features userselect">
-                <tr v-for="feature in announcement.features">
+                <tr v-for="feature in announcement.get('features')">
                     <td>{{(feature as any).left}}</td>
                     <td>{{(feature as any).right}}</td>
                 </tr>

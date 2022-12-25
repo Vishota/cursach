@@ -28,7 +28,7 @@
 </script>
 <template>
     <div>
-        <div class="replacer" v-if="pics.length == 0 || (pics.length == 1 && pics.at(0) == '')">no pic</div>
+        <div class="replacer" v-if="pics.length == 0 || (pics.length == 1 && pics.at(0) == '')"></div>
         <img class="pointer" v-if="!(pics.length == 1 && pics.at(0) == '')" loading="lazy" @click="onClick" @mousemove="updateShownImage" v-show="i == shown" v-for="pic, i in pics" :src="pic">
     </div>
 </template>
@@ -53,6 +53,9 @@
         justify-content: center;
         align-items: center;
         border-radius: inherit;
+    }
+    .replacer::after {
+        content: 'no pic';
     }
     div {
         width: 100%;

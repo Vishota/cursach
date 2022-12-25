@@ -6,16 +6,12 @@ class LazyProperty<T> {
     }
     public load: () => Promise<T>;
     public get value() {
-        if(this._value === undefined) throw new NotInitializedPropertyError();
-        return this._value;
+        //if(this._value === undefined) throw new NotInitializedPropertyError();
+        this.init();
+        return this._value as T;
     }
     public async init() : Promise<void> {
+        if(this._value !== undefined) return;
         this._value = await this.load();
-    }
-}
-
-export class NotInitializedPropertyError extends Error {
-    constructor() {
-        super('NotInitializedPropertyError');
     }
 }

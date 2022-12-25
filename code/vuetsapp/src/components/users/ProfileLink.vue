@@ -5,8 +5,7 @@
 
     var props = defineProps(['id']);
     var user = reactive(users.get(props.id));
-    console.log('.' + user);
 </script>
 <template>
-    <RouterLink :to="'/profiles/'+id">{{user.username}}</RouterLink>
+    <RouterLink :to="'/profiles/'+id">{{user.get('username')}}</RouterLink>
 </template>

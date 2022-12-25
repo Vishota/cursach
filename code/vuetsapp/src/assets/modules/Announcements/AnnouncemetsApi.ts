@@ -25,15 +25,16 @@ import AnnouncementFeature from './AnnouncementFeature';
         return (await post('/api/announcements/description.php', {id})).description;
     }
     async getPics(id: number) : Promise<string[]> {
-        return JSON.parse(await post('/api/announcements/pics.php', {id})).pics;
+        return JSON.parse((await post('/api/announcements/pics.php', {id})).pics);
     }
     async getPrice(id: number) : Promise<string> {
         return (await post('/api/announcements/price.php', {id})).price;
     }
     async getFeatures(id: number) : Promise<AnnouncementFeature[]> {
-        var featuresObj : any[] = JSON.parse( (await post('/api/announcements/features.php', {id})).features );
+        var featuresObjArr : any[] = JSON.parse( (await post('/api/announcements/features.php', {id})).features );
+        
         var features : AnnouncementFeature[] = [];
-        featuresObj.forEach(v=>{
+        featuresObjArr.forEach(v=>{
             features.push( new AnnouncementFeature( v.left, v.right ) );
         });
         return features;

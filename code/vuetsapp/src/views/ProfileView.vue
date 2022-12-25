@@ -24,7 +24,7 @@
             </div>
             <div class="vertflex">
                 <div class="gallery-container">
-                    <GalleryComponent :pics="[ user.pic ]" class="gallery" openable />
+                    <GalleryComponent :pics="[ user.get('pic') ]" class="gallery" openable />
                 </div>
                 <button class="butaccent" v-if="accounts.getMyId() === id" @click="router.push('/new')">Создать объявление</button>
                 <button class="butregular" v-if="accounts.getMyId() === id">Настройки</button>

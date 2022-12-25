@@ -5,12 +5,11 @@
     import { ref, reactive } from 'vue';
     import { useRoute } from 'vue-router';
     import GalleryComponent from '@/components/GalleryComponent.vue';
+    import type AnnouncementFeature from '../assets/modules/Announcements/AnnouncementFeature';
+    import router from '@/router';
 
     var id = ref(parseInt(useRoute().params.id as string));
     var announcement = reactive(announcements.get(id.value));
-    console.log(announcement.get('owner'));
-    
-    announcement.initAll();
 </script>
 <template>
     <div class="vertflex">
@@ -24,15 +23,15 @@
                     <p class="userselect">{{announcement.get('description')}}</p>
                 </div>
                 <ProfileLink :id="announcement.get('owner')"/>
-                <button class="butregular" v-show="announcement.get('owner') == accounts.getMyId()">Редактировать</button>
+                <button class="butregular" v-show="announcement.get('owner') == accounts.getMyId()" @click="router.push('/announcements/'+id+'/edit')">Редактировать</button>
                 <h3>{{announcement.get('price')}} BYN</h3>
             </div>
         </div>
         <div class="block">
             <table class="features userselect">
                 <tr v-for="feature in announcement.get('features')">
-                    <td>{{(feature as any).left}}</td>
-                    <td>{{(feature as any).right}}</td>
+                    <td>{{(feature as AnnouncementFeature).name}}</td>
+                    <td>{{(feature as AnnouncementFeature).value}}</td>
                 </tr>
             </table>
         </div>

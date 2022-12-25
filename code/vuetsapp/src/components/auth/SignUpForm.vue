@@ -102,7 +102,6 @@
 
         emailCodeStatus.value = 0;
         showBadEmailCode.value = false;
-        console.log(isEmailTaken.value);
     }
     function updatePasswordsMatch() {
         var passwordin = document.querySelector('#password') as HTMLInputElement;

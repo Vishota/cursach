@@ -1,34 +1,22 @@
 import users from "./ProfilesApi";
+import LazyObject from '../../classes/Lazy/LazyObject';
+import LazyProperty from "@/assets/classes/Lazy/LazyProperty";
 
 export default
-class Profile {
+class Profile extends LazyObject {
     private readonly _id: number;
-    private _username?: string;
-    private _pic?: string;
+    
+    protected properties : Map<string, LazyProperty<any>> = new Map<string, LazyProperty<any>>([
+        [ 'username', new LazyProperty<string>(async ()=>{return await users.getUsername(this._id)}) ],
+        [ 'pic', new LazyProperty<string>(async ()=>{return await users.getPic(this._id)}) ]
+    ]);
 
     constructor(id: number) {
+        super();
         this._id = id;
     }
 
     get id() : number|undefined {
         return this._id;
-    }
-    get username() : string {
-        if(this._username=== undefined) {
-            users.getUsername(this._id)
-                .then(r=> {
-                    this._username = r.username;
-                })
-        }
-        return this._username as string;
-    }
-    get pic() : string {
-        if(this._pic === undefined) {
-            users.getPic(this._id)
-                .then(pic => {
-                    this._pic = pic;
-                })
-        }
-        return this._pic as string;
     }
 }

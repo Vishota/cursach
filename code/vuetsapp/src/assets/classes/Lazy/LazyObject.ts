@@ -1,5 +1,4 @@
 import type LazyProperty from "./LazyProperty";
-import { NotInitializedPropertyError } from "./LazyProperty";
 
 export default
 abstract class LazyObject {
@@ -20,12 +19,8 @@ abstract class LazyObject {
         });
     }
     public get(propertyName : string) {
-        try {
-            return this.properties.get(propertyName)?.value;
-        }
-        catch (e) {
-            throw new NotInitializedPropertyError();
-        }
+        if(!this.properties.has(propertyName)) throw new CannotInitPropertyError(propertyName);
+        return this.properties.get(propertyName)?.value;
     };
     public async loadAndGet(propertyName : string) {
         try {

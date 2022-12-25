@@ -14,6 +14,11 @@ const router = createRouter({
       component: () => import('../views/AnnouncementView.vue')
     },
     {
+      path: '/announcements/:id/edit',
+      name: 'announcement-edit',
+      component: () => import('../views/AnnouncementEditView.vue')
+    },
+    {
       path: '/profiles/:id',
       name: 'profile',
       component: () => import('../views/ProfileView.vue')

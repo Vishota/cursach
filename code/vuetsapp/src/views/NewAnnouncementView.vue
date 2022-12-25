@@ -1,8 +1,6 @@
 <script lang="ts" setup>
     import { ref } from 'vue';
     import announcements from '@/assets/modules/Announcements/AnnouncementsModule';
-    import { post } from '@/assets/modules/ajax';
-
 
     var featuresCount = ref(0);
     var features = ref([] as Array<any>);

@@ -3,6 +3,7 @@
     import announcements from '@/assets/modules/Announcements/AnnouncementsModule'
     import { reactive } from 'vue';
     import type Announcement from '@/assets/modules/Announcements/Announcement';
+    
     var props = defineProps(['id'])
     if(props.id === undefined) throw('undefined id');
     var announcement = reactive(announcements.get(props.id) as Announcement);

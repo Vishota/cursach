@@ -20,7 +20,7 @@ abstract class LazyObject {
     }
     public get(propertyName : string) {
         if(!this.properties.has(propertyName)) throw new CannotInitPropertyError(propertyName);
-        return this.properties.get(propertyName)?.value;
+        return (this.properties.get(propertyName) as LazyProperty<any>).value;
     };
     public async loadAndGet(propertyName : string) {
         try {

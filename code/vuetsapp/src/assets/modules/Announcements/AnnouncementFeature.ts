@@ -6,5 +6,11 @@ class AnnouncementFeature {
     public get value(): string {
         return this._value;
     }
-    constructor(private _name : string, private _value : string) {}
+    public set name(v : string) {
+        this._name = v;
+    }
+    public set value(v : string) {
+        this._value = v;
+    }
+    constructor(private _name : string = '', private _value : string = '') {}
 }

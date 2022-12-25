@@ -39,5 +39,8 @@ import AnnouncementFeature from './AnnouncementFeature';
         });
         return features;
     }
+    async editAnnouncement(id: number, announcementObject: any) {
+        
+    }
 }
 export default AnnouncementsApi.instance;

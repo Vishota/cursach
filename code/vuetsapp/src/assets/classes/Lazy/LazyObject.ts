@@ -3,10 +3,12 @@ import type LazyProperty from "./LazyProperty";
 export default
 abstract class LazyObject {
     protected abstract _properties : Map<string, LazyProperty<any>>;
-    public initAll() {
+    public async initAll() {
+        var wait : Promise<void>[] = [];
         this._properties.forEach(p=>{
-            p.load();
+            wait.push(p.init());
         })
+        await Promise.all(wait);
     }
     public init(names : string[]) {
         names.forEach(name => {
@@ -31,11 +33,21 @@ abstract class LazyObject {
             new CannotInitPropertyError(propertyName);
         }
     };
-    public async toObject() {
+    public toObject() {
         var object : any = {};
+        this.initAll();
         (Array.from(this._properties.entries()))
             .forEach(p=>{
-                object[p[0]] = p[1];
+                object[p[0]] = p[1].value;
+            })
+        return object;
+    }
+    public async toObjectAwait() {
+        var object : any = {};
+        await this.initAll();   
+        (Array.from(this._properties.entries()))
+            .forEach(p=>{
+                object[p[0]] = p[1].value;
             })
         return object;
     }

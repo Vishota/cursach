@@ -4,7 +4,7 @@ class LazyProperty<T> {
     constructor(load: (() => Promise<T>) ) {
         this.load = load;
     }
-    public load: () => Promise<T>;
+    private load: () => Promise<T>;
     public get value() {
         //if(this._value === undefined) throw new NotInitializedPropertyError();
         this.init();

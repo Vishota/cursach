@@ -11,7 +11,7 @@
       <RouterView />
     </main>
     <FooterComponent />
-  </div>
+  </di v>
 </template>
 
 <style scoped>

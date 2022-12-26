@@ -1,5 +1,5 @@
 import api from './AnnouncemetsApi';
-import type AnnouncementFeature from './AnnouncementFeature';
+import type { AnnouncementFeature } from './AnnouncementFeature';
 import LazyObject from '../../classes/Lazy/LazyObject';
 import LazyProperty from '@/assets/classes/Lazy/LazyProperty';
 

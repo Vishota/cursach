@@ -1,6 +1,6 @@
 import SingletonDuplicationError from "../Errors/SingletonDuplicationError";
 import { post } from "../ajax"
-import AnnouncementFeature from './AnnouncementFeature';
+import type { AnnouncementFeature } from './AnnouncementFeature';
 
 /*delete export then*/export class AnnouncementsApi {
     private static _instance : AnnouncementsApi;
@@ -35,7 +35,7 @@ import AnnouncementFeature from './AnnouncementFeature';
         
         var features : AnnouncementFeature[] = [];
         featuresObjArr.forEach(v=>{
-            features.push( new AnnouncementFeature( v.left, v.right ) );
+            features.push( v );
         });
         return features;
     }

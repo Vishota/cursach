@@ -5,7 +5,7 @@
     import { ref, reactive } from 'vue';
     import { useRoute } from 'vue-router';
     import GalleryComponent from '@/components/GalleryComponent.vue';
-    import type AnnouncementFeature from '../assets/modules/Announcements/AnnouncementFeature';
+    import type { AnnouncementFeature } from '../assets/modules/Announcements/AnnouncementFeature';
     import * as navigation from '@/assets/modules/navigation';
 
     var id = ref(parseInt(useRoute().params.id as string));
@@ -30,8 +30,8 @@
         <div class="block">
             <table class="features userselect">
                 <tr v-for="feature in announcement.get('features')">
-                    <td>{{(feature as AnnouncementFeature).name}}</td>
-                    <td>{{(feature as AnnouncementFeature).value}}</td>
+                    <td>{{(feature as AnnouncementFeature).left}}</td>
+                    <td>{{(feature as AnnouncementFeature).right}}</td>
                 </tr>
             </table>
         </div>

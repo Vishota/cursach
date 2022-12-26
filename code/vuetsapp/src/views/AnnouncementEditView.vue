@@ -3,7 +3,7 @@
     import announcements from '@/assets/modules/Announcements/AnnouncementsModule';
     import { useRoute } from 'vue-router';
     import type Announcement from '../assets/modules/Announcements/Announcement';
-    import type AnnouncementFeature from '@/assets/modules/Announcements/AnnouncementFeature';
+    import type { AnnouncementFeature } from '@/assets/modules/Announcements/AnnouncementFeature';
     import * as navigation from '@/assets/modules/navigation';
     import ConfirmWindow from '@/components/ConfirmWindow.vue';
     import { closeWindow } from '../assets/authwindows';
@@ -25,7 +25,7 @@
         loading.value = true;
         (announcementObject.value.features as AnnouncementFeature[]).forEach(
             (v,i)=>{
-                if(v.name == '' || v.value == '') (announcementObject.value.features as AnnouncementFeature[]).splice(i, 1)
+                if(v.left == '' || v.right == '') (announcementObject.value.features as AnnouncementFeature[]).splice(i, 1)
             });
         (announcementObject.value.pics as string[]).forEach(
             (v,i)=>{
@@ -58,8 +58,8 @@
         <div class="vertflex block">
             <h2>Характеристики</h2>
             <div class="horflex featureRow" v-for="i in announcementObject.features.length">
-                <input class="in"  v-model="announcementObject.features[i - 1].name" placeholder="Характеристика" :disabled="loading">
-                <input class="in" v-model="announcementObject.features[i - 1].value" placeholder="Значение" :disabled="loading">
+                <input class="in"  v-model="announcementObject.features[i - 1].left" placeholder="Характеристика" :disabled="loading">
+                <input class="in" v-model="announcementObject.features[i - 1].right" placeholder="Значение" :disabled="loading">
             </div>
             <button class="add-feature butaccent" @click="announcementObject.features.push( {left:'',right:''} )" :disabled="loading">+</button>
             <p>Для удаления оставьте поля пустыми</p>

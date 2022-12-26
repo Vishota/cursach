@@ -108,6 +108,7 @@
 
         function addAnnouncement(string $title, string $description, int $price, string $featuresJson, string $picturesJson) {
             if(!$this->canIAdd()) return false;
+            $price = max(0, $price);
             $me = UsersModule::getInstance()->getMyId();
             return CursachDatabase::getInstance()->request(
                 'INSERT INTO `announcements` (`id`, `owner_id`, `title`, `description`, `price`, `created`, `features`, `pictures`)
@@ -117,6 +118,7 @@
         }
         function editAnnouncement(int $id, string $title, string $description, int $price, string $featuresJson, string $picturesJson) : bool {
             if(!$this->canIEdit($id)) return false;
+            $price = max(0, $price);
             if(CursachDatabase::getInstance()
                 ->request('UPDATE `announcements` SET `title`=?, `description`=?,`price`=?,`features`=?,`pictures`=? WHERE `announcements`.`id` = ?;',
                 [$title, $description, $price, $featuresJson, $picturesJson, $id])

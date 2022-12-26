@@ -47,12 +47,20 @@ class UsersModule {
             ->request('INSERT INTO tokens (account_id, token) VALUES (?,?)', [$id, $code]);
     }
     function checkToken() {
-        if(!(isset($_COOKIE['id']) && $_COOKIE['token'])) return false;
+        if(!(isset($_COOKIE['id']) && $_COOKIE['token'])) {
+            setcookie('id', '', time()-1000);
+            setcookie('token', '', time()-1000);
+            return false;
+        }
         $id = $_COOKIE['id'];
         $token = $_COOKIE['token'];
-        return CursachDatabase::getInstance()
+        if(CursachDatabase::getInstance()
             ->request('SELECT * FROM tokens WHERE account_id = ? && token = ?', [$id, $token])
-            ->rowCount() !== 0;
+            ->rowCount() !== 0) return true;
+        else {
+            setcookie('id', '', time()-1000);
+            setcookie('token', '', time()-1000);
+        }
     }
 
     function isEmailAvailable(string $email) {
@@ -86,14 +94,17 @@ class UsersModule {
     }
 
     function getUsername(int $id) {
-        return CursachDatabase::getInstance()
-            ->request('SELECT username FROM profiles WHERE account_id = ?', [$id], PDO::FETCH_NUM)
-            ->response()[0];
+        $username = CursachDatabase::getInstance()
+            ->request('SELECT username FROM profiles WHERE account_id = ?', [$id], PDO::FETCH_NUM);
+        if($username->rowCount() == 0) return false;
+        return $username->response()[0]['username'];
     }
     function getPicture(int $id) {
-        return CursachDatabase::getInstance()
-            ->request('SELECT picture FROM profiles WHERE account_id = ?', [$id], PDO::FETCH_NUM)
-            ->response()[0];
+        $picture = CursachDatabase::getInstance()
+            ->request('SELECT picture FROM profiles WHERE account_id = ?', [$id], PDO::FETCH_NUM);
+        if($picture->rowCount() == 0) return false;
+        
+        return $picture->response()[0]['picture'];
     }
     function getMyId() {
         if($this->checkToken() == false) return false;

@@ -29,7 +29,7 @@
 <template>
     <div>
         <div class="replacer" v-if="pics.length == 0 || (pics.length == 1 && pics.at(0) == '')"></div>
-        <img class="pointer" v-if="!(pics.length == 1 && pics.at(0) == '')" loading="lazy" @click="onClick" @error="(pics as string[]).splice(i, 1)" @mousemove="updateShownImage" v-show="i == shown" v-for="pic, i in pics" :src="pic">
+        <img class="pointer" v-show="i == shown && pic != undefined && !(pics.length == 1 && pics.at(0) == '')" loading="lazy" @click="onClick" @error="(pics as string[]).splice(i, 1)" @mousemove="updateShownImage" v-for="pic, i in pics" :src="pic">
     </div>
 </template>
 <style scoped>

@@ -1,10 +1,9 @@
 <script lang="ts" setup>
     import { reactive, ref } from 'vue';
     import { useRoute } from 'vue-router';
-    import { search } from '@/assets/modules/Announcements/search';
     import AnnouncementsList from '@/components/announcements/AnnouncementsList.vue';
     import AnnouncementsQuery from '@/assets/modules/Announcements/AnnouncementsQuery';
-    
+    import * as navigation from '@/assets/modules/navigation';
     import router from '@/router';
 
     var text = ref(useRoute().params.text as string);
@@ -14,7 +13,7 @@
     var query = (new AnnouncementsQuery()).setText(text.value);
 
     function onSearchClicked() {
-        search((document.querySelector('#search') as HTMLInputElement).value);
+        navigation.goSearch((document.querySelector('#search') as HTMLInputElement).value);
         text.value = (document.querySelector('#search') as HTMLInputElement).value;
         query = (new AnnouncementsQuery()).setText(text.value);
         update.value++

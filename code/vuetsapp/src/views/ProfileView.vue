@@ -7,7 +7,7 @@
     import GalleryComponent from '@/components/GalleryComponent.vue';
     import AnnouncementsQuery from '@/assets/modules/Announcements/AnnouncementsQuery';
     import AnnouncementsList from '@/components/announcements/AnnouncementsList.vue';
-    import router from '@/router';
+    import * as navigation from '@/assets/modules/navigation';
 
     var id = ref(parseInt(useRoute().params.id as string));
     var user = reactive(profiles.get(id.value));
@@ -26,7 +26,7 @@
                 <div class="gallery-container">
                     <GalleryComponent :pics="[ user.get('pic') ]" class="gallery" openable />
                 </div>
-                <button class="butaccent" v-if="accounts.getMyId() === id" @click="router.push('/new')">Создать объявление</button>
+                <button class="butaccent" v-if="accounts.getMyId() === id" @click="navigation.goNew()">Создать объявление</button>
                 <button class="butregular" v-if="accounts.getMyId() === id">Настройки</button>
             </div>
         </div>

@@ -1,7 +1,7 @@
 <?php
-    require_once __DIR__.'/../../common/singleton/SingletonTrait.php';
-    require_once __DIR__.'/../../main/CursachDatabase.php';
-    require_once __DIR__.'/../accounts/UsersModule.php';
+    require_once __DIR__.'/../common/singleton/SingletonTrait.php';
+    require_once __DIR__.'/../main/CursachDatabase.php';
+    require_once __DIR__.'/UsersModule.php';
 
     class AnnouncementsModule {
         use SingletonTrait;
@@ -65,6 +65,12 @@
             ];
         }
 
+        /**
+         * in:
+         *  query
+         * out:
+         *  array of ids
+         */
         function search(string $query) {
             $request = $this->queryToRequest($query);
             $requestResult = CursachDatabase::getInstance()->request($request['statement'], $request['params'])->response();
@@ -74,81 +80,73 @@
             }
             return $ids;
         }
-        function getTitle(int $id) : string {
+        /**
+         * in:
+         *  array of columns to select
+         * out:
+         *  array of selected columns / false
+         */
+        function getInfo(int $id, array $columns) : array {
+            if(!$this->canIGet($id)) return false;
+            $allowed = ['id', 'owner_id', 'title', 'description', 'price', 'created', 'features', 'pictures', 'status'];
+            $columns = array_intersect($columns, $allowed);
+            $columnsString = '';
+            foreach ($columns as $column) {
+                $columnsString .= $column.',';
+            }
+            $columnsString = substr($columnsString, 0, -1);
             return CursachDatabase::getInstance()
-                ->request('SELECT title FROM announcements WHERE id=?', [$id])
-                ->response()[0]['title'];
+                ->request("SELECT $columnsString FROM announcements WHERE id=?", [$id])
+                ->response()[0];
         }
-        function getDescription(int $id) : string {
-            return CursachDatabase::getInstance()
-                ->request('SELECT description FROM announcements WHERE id=?', [$id])
-                ->response()[0]['description'];
-        }
-        function getOwner(int $id) : int {
-            return CursachDatabase::getInstance()
-                ->request('SELECT owner_id FROM announcements WHERE id=?', [$id])
-                ->response()[0]['owner_id'];
-        }
-        function getFeatures(int $id) : string {
-            return CursachDatabase::getInstance()
-                ->request('SELECT features FROM announcements WHERE id=?', [$id])
-                ->response()[0]['features'];
-        }
-        function getPics(int $id) : string {
-            return CursachDatabase::getInstance()
-                ->request('SELECT pictures FROM announcements WHERE id=?', [$id])
-                ->response()[0]['pictures'];
-        }
-        function getPrice(int $id) : string {
-            return CursachDatabase::getInstance()
-                ->request('SELECT price FROM announcements WHERE id=?', [$id])
-                ->response()[0]['price'];
-        }
+        /**
+         * in:
+         *  id
+         * out:
+         *  string description / false
+         */
 
-        function addAnnouncement(int $owner_id, string $title, string $description, int $price, string $featuresJson, string $picturesJson) {
+        function addAnnouncement(string $title, string $description, int $price, string $featuresJson, string $picturesJson) {
+            if(!$this->canIAdd()) return false;
+            $me = UsersModule::getInstance()->getMyId();
             return CursachDatabase::getInstance()->request(
                 'INSERT INTO `announcements` (`id`, `owner_id`, `title`, `description`, `price`, `created`, `features`, `pictures`)
                 VALUES (NULL, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?, ?)',
-                [$owner_id, $title, $description, $price, $featuresJson, $picturesJson])
+                [$me, $title, $description, $price, $featuresJson, $picturesJson])
                     ->lastInsertId();
         }
         function editAnnouncement(int $id, string $title, string $description, int $price, string $featuresJson, string $picturesJson) : bool {
-            if(!$this->canEdit($id)) return false;
+            if(!$this->canIEdit($id)) return false;
             if(CursachDatabase::getInstance()
-                ->request('UPDATE `announcements` SET `title` = ?, `description`=?,`price`=?,`features`=?,`pictures`=? WHERE `announcements`.`id` = ?;',
+                ->request('UPDATE `announcements` SET `title`=?, `description`=?,`price`=?,`features`=?,`pictures`=? WHERE `announcements`.`id` = ?;',
                 [$title, $description, $price, $featuresJson, $picturesJson, $id])
                 ->rowCount() == 0 ) return false;
             return true;
         }
-        function deleteAnnouncement(int $id, string $title, string $description, int $price, string $featuresJson, string $picturesJson) : bool {
-            if(!$this->canEdit($id)) return false;
+        function deleteAnnouncement(int $id) : bool {
+            if(!$this->canIDelete($id)) return false;
             if(CursachDatabase::getInstance()
-                ->request('UPDATE `announcements` SET `title` = ?, `description`=?,`price`=?,`features`=?,`pictures`=? WHERE `announcements`.`id` = ?;',
-                [$title, $description, $price, $featuresJson, $picturesJson, $id])
+                ->request('UPDATE `announcements` SET `status`="DELETED" WHERE `announcements`.`id` = ?;', [$id])
                 ->rowCount() == 0 ) return false;
             return true;
         }
 
-        function isOwner(int $id) {
-            return $this->getOwner($id) === UsersModule::getInstance()->getMyId();
+        public function amIOwner(int $announcementId) {
+            return $this->getInfo($announcementId, ['owner_id'])['owner_id'] === UsersModule::getInstance()->getMyId();
         }
-        function canEdit(int $announcementId) : bool {
-            $userId = UsersModule::getInstance()->getMyId();
-            if($userId === false) return false;
-            if($userId === $this->getOwner($announcementId)) return true;
-            return false;
+        public function canIEdit($announcementId) : bool {
+            return $this->amIOwner($announcementId);
         }
-        function canDelete(int $announcementId) : bool {
-            $userId = UsersModule::getInstance()->checkToken();
-            if($userId === false) return false;
-            if($userId === $this->getOwner($announcementId)) return true;
-            return false;
+        public function canIDelete($announcementId) : bool {
+            return $this->amIOwner($announcementId) || UsersModule::getInstance()->amIModerator();
         }
-        function canGet(int $announcementId) : bool {
-            $userId = UsersModule::getInstance()->checkToken();
-            if(UsersModule::getInstance()->getStatus($userId) == 'BLOCKED') return false;
-            if($userId === $this->getOwner($announcementId)) return true;
-            return false;
+        public function canIGet($announcementId) : bool {
+            return CursachDatabase::getInstance()
+                ->request("SELECT status FROM announcements WHERE id=?", [$announcementId])
+                ->response()[0] !== 'DELETED' &&
+                UsersModule::getInstance()->getMyStatus() !== 'BLOCKED';
+        }
+        public function canIAdd() : bool {
+            return UsersModule::getInstance()->getMyStatus() === 'ACTIVE';
         }
     }
-    

@@ -16,22 +16,22 @@ import AnnouncementFeature from './AnnouncementFeature';
     }
 
     async getTitle(id : number) : Promise<string> {
-        return (await post('/api/announcements/title.php', {id})).title;
+        return (await post('/api/announcements/get.php', {id, info: JSON.stringify( ['title'] )})).title;
     }
     async getOwner(id : number) : Promise<number> {
-        return (await post('/api/announcements/owner.php', {id})).owner;
+        return (await post('/api/announcements/get.php', {id, info: JSON.stringify( ['owner_id'] )})).owner_id;
     }
     async getDescription(id : number) : Promise<string> {
-        return (await post('/api/announcements/description.php', {id})).description;
+        return (await post('/api/announcements/get.php', {id, info: JSON.stringify( ['description'] )})).description;
     }
     async getPics(id: number) : Promise<string[]> {
-        return JSON.parse((await post('/api/announcements/pics.php', {id})).pics);
+        return JSON.parse((await post('/api/announcements/get.php', {id, info: JSON.stringify( ['pictures'] )})).pictures);
     }
     async getPrice(id: number) : Promise<string> {
-        return (await post('/api/announcements/price.php', {id})).price;
+        return (await post('/api/announcements/get.php', {id, info: JSON.stringify( ['price'] )})).price;
     }
     async getFeatures(id: number) : Promise<AnnouncementFeature[]> {
-        var featuresObjArr : any[] = JSON.parse( (await post('/api/announcements/features.php', {id})).features );
+        var featuresObjArr : any[] = JSON.parse( (await post('/api/announcements/get.php', {id, info: JSON.stringify( ['features'] )})).features );
         
         var features : AnnouncementFeature[] = [];
         featuresObjArr.forEach(v=>{

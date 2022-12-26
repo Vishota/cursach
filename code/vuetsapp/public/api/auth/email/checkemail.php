@@ -1,6 +1,6 @@
 <?php
 try {
-    require_once __DIR__.'/../../../back/modules/accounts/UsersModule.php';
+    require_once __DIR__.'/../../../back/modules/UsersModule.php';
     require_once __DIR__.'/../../../back/main/CursachEmailVerifier.php';
 
     $return = [];

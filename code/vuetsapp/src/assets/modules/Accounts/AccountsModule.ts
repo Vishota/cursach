@@ -36,6 +36,7 @@ import * as cookie from "../cookie"
     public logout() {
         cookie.eraseCookie('id');
         cookie.eraseCookie('token');
+        window.location.reload();
     }
 }
 

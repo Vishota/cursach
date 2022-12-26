@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Дек 24 2022 г., 18:53
--- Версия сервера: 8.0.31
--- Версия PHP: 7.4.32
+-- Время создания: Дек 26 2022 г., 03:28
+-- Версия сервера: 8.0.29
+-- Версия PHP: 7.4.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -73,6 +73,7 @@ INSERT INTO `accounts_verify_codes` (`identifier`, `code`, `type`) VALUES
 
 CREATE TABLE `announcements` (
   `id` int NOT NULL,
+  `status` enum('ACTIVE','DELETED') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'ACTIVE',
   `owner_id` int NOT NULL,
   `title` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `description` varchar(1200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
@@ -86,13 +87,17 @@ CREATE TABLE `announcements` (
 -- Дамп данных таблицы `announcements`
 --
 
-INSERT INTO `announcements` (`id`, `owner_id`, `title`, `description`, `price`, `created`, `features`, `pictures`) VALUES
-(1, 18, 'aa', 'asd', 0, '2022-12-23 14:15:06', '[{\"left\": \"11\", \"right\": \"22\"}]', '[]'),
-(2, 18, 'Монитор LG as24mp59g-p', 'Отличное состояние, в комплекте с блоком, 75гц', 200, '2022-12-23 14:59:01', '[{\"left\": \"Производитель\", \"right\": \"LG\"}, {\"left\": \"Диагональ экрана\", \"right\": \"24\\\"\"}, {\"left\": \"Разрешение\", \"right\": \"1080р\"}, {\"left\": \"Тип матрицы\", \"right\": \"IPS\"}]', '[\"https://yams.kufar.by/api/v1/kufar-ads/images/82/8220306404.jpg?rule=gallery\"]'),
-(3, 18, 'Автомобиль Volvo S40', 'Отличное состояние, в комплекте с блоком, 75гц', 19200, '2022-12-23 15:02:51', '[{\"left\": \"Марка\", \"right\": \"Volvo\"}, {\"left\": \"Модель\", \"right\": \"S40\"}, {\"left\": \"Поколение\", \"right\": \"II\"}, {\"left\": \"Тип матрицы\", \"right\": \"IPS\"}, {\"left\": \"Пробег\", \"right\": \"285000\"}, {\"left\": \"Объем двигателя\", \"right\": \"1.8 л\"}, {\"left\": \"Коробка передач\", \"right\": \"Механика\"}]', '[\"https://yams.kufar.by/api/v1/kufar-ads/images/49/4934429801.jpg?rule=gallery\", \"https://yams.kufar.by/api/v1/kufar-ads/images/49/4951476439.jpg?rule=gallery\", \"https://yams.kufar.by/api/v1/kufar-ads/images/49/4983394031.jpg?rule=gallery\", \"https://yams.kufar.by/api/v1/kufar-ads/images/49/4900440669.jpg?rule=gallery\", \"https://yams.kufar.by/api/v1/kufar-ads/images/49/4995985157.jpg?rule=gallery\"]'),
-(4, 32, 'Чехол samsung S8 plus', 'Чехол для Samsung S8 plus , новый ,не оригинал.\n', 15, '2022-12-23 17:33:31', '[{\"left\": \"Модель телефона\", \"right\": \"Samsung S8 Plus\"}, {\"left\": \"Состояние\", \"right\": \"новый\"}]', '[\"https://yams.kufar.by/api/v1/kufar-ads/images/49/4942290068.jpg?rule=gallery\", \"https://yams.kufar.by/api/v1/kufar-ads/images/49/4967860025.jpg?rule=gallery\"]'),
-(5, 32, 'Отличный Рено-Гранд-Сценик', 'Автомобиль в отличном состоянии, обслужен, не требует вложений, версия LIMITED, крепкий кузов без коррозии и царапин, надёжный экономичный мотор (81KW110л.с.)6-ст-я КПП, аккуратный некуренный салон - трансформер, все стекла и оптика - оригинальные без трещин и соколов, богатая комплектация, оригинальный пробег подтверждён сервисными документами, отличная зимняя резина Good Year + летние шины Michelin, 2 ключа, много секретных бардачков и ниш. Пройден гостехосмотр. Диагностика на любой СТО.\n', 36000, '2022-12-23 17:37:10', '[{\"left\": \"Марка\", \"right\": \"Renault\"}, {\"left\": \"Модель\", \"right\": \"Scenic\"}, {\"left\": \"Поколение\", \"right\": \"|||\"}, {\"left\": \"Год\", \"right\": \"2016\"}, {\"left\": \"Тип двигателя\", \"right\": \"Дизель\"}, {\"left\": \"Привод\", \"right\": \"Передний\"}]', '[\"https://yams.kufar.by/api/v1/kufar-ads/images/49/4967449640.jpg?rule=gallery\", \"https://yams.kufar.by/api/v1/kufar-ads/images/49/4999263088.jpg?rule=gallery\", \"https://yams.kufar.by/api/v1/kufar-ads/images/49/4924833045.jpg?rule=gallery\", \"https://yams.kufar.by/api/v1/kufar-ads/images/49/4907786407.jpg?rule=gallery\"]'),
-(6, 18, 'Продам говно', 'Ыыы', 999, '2022-12-24 12:36:54', '[{\"left\": \"Че\", \"right\": \"Каво\"}, {\"left\": \"Ааыа\", \"right\": \"ъеъ\"}]', '[\"file:///C:/Users/Vishota/Desktop/algo.jpg\", \"file:///C:/Users/Vishota/Desktop/1.png\"]');
+INSERT INTO `announcements` (`id`, `status`, `owner_id`, `title`, `description`, `price`, `created`, `features`, `pictures`) VALUES
+(1, 'DELETED', 18, 'aa', 'asd', 0, '2022-12-23 14:15:06', '[{\"left\": \"11\", \"right\": \"22\"}]', '[]'),
+(2, 'DELETED', 18, 'Монитор LG as24mp59g-p', 'Отличное состояние, в комплекте с блоком, 75гц', 200, '2022-12-23 14:59:01', '[{\"left\": \"Производитель\", \"right\": \"LG\"}, {\"left\": \"Диагональ экрана\", \"right\": \"24\\\"\"}, {\"left\": \"Разрешение\", \"right\": \"1080р\"}, {\"left\": \"Тип матрицы\", \"right\": \"IPS\"}]', '[\"https://yams.kufar.by/api/v1/kufar-ads/images/82/8220306404.jpg?rule=gallery\"]'),
+(3, 'ACTIVE', 18, 'Автомобиль Volvo S40', 'Отличное состояние, в комплекте с блоком, 75гц', 19200, '2022-12-23 15:02:51', '[{\"left\": \"Марка\", \"right\": \"Volvo\"}, {\"left\": \"Модель\", \"right\": \"S40\"}, {\"left\": \"Поколение\", \"right\": \"II\"}, {\"left\": \"Тип матрицы\", \"right\": \"IPS\"}, {\"left\": \"Пробег\", \"right\": \"285000\"}, {\"left\": \"Объем двигателя\", \"right\": \"1.8 л\"}, {\"left\": \"Коробка передач\", \"right\": \"Механика\"}]', '[\"https://yams.kufar.by/api/v1/kufar-ads/images/49/4934429801.jpg?rule=gallery\", \"https://yams.kufar.by/api/v1/kufar-ads/images/49/4951476439.jpg?rule=gallery\", \"https://yams.kufar.by/api/v1/kufar-ads/images/49/4983394031.jpg?rule=gallery\", \"https://yams.kufar.by/api/v1/kufar-ads/images/49/4900440669.jpg?rule=gallery\", \"https://yams.kufar.by/api/v1/kufar-ads/images/49/4995985157.jpg?rule=gallery\"]'),
+(4, 'ACTIVE', 32, 'Чехол samsung S8 plus', 'Чехол для Samsung S8 plus , новый ,не оригинал.\n', 15, '2022-12-23 17:33:31', '[{\"left\": \"Модель телефона\", \"right\": \"Samsung S8 Plus\"}, {\"left\": \"Состояние\", \"right\": \"новый\"}]', '[\"https://yams.kufar.by/api/v1/kufar-ads/images/49/4942290068.jpg?rule=gallery\", \"https://yams.kufar.by/api/v1/kufar-ads/images/49/4967860025.jpg?rule=gallery\"]'),
+(5, 'ACTIVE', 32, 'Отличный Рено-Гранд-Сценик', 'Автомобиль в отличном состоянии, обслужен, не требует вложений, версия LIMITED, крепкий кузов без коррозии и царапин, надёжный экономичный мотор (81KW110л.с.)6-ст-я КПП, аккуратный некуренный салон - трансформер, все стекла и оптика - оригинальные без трещин и соколов, богатая комплектация, оригинальный пробег подтверждён сервисными документами, отличная зимняя резина Good Year + летние шины Michelin, 2 ключа, много секретных бардачков и ниш. Пройден гостехосмотр. Диагностика на любой СТО.\n', 36000, '2022-12-23 17:37:10', '[{\"left\": \"Марка\", \"right\": \"Renault\"}, {\"left\": \"Модель\", \"right\": \"Scenic\"}, {\"left\": \"Поколение\", \"right\": \"|||\"}, {\"left\": \"Год\", \"right\": \"2016\"}, {\"left\": \"Тип двигателя\", \"right\": \"Дизель\"}, {\"left\": \"Привод\", \"right\": \"Передний\"}]', '[\"https://yams.kufar.by/api/v1/kufar-ads/images/49/4967449640.jpg?rule=gallery\", \"https://yams.kufar.by/api/v1/kufar-ads/images/49/4999263088.jpg?rule=gallery\", \"https://yams.kufar.by/api/v1/kufar-ads/images/49/4924833045.jpg?rule=gallery\", \"https://yams.kufar.by/api/v1/kufar-ads/images/49/4907786407.jpg?rule=gallery\"]'),
+(6, 'ACTIVE', 18, 'Продам говно', 'Ыыы', 99, '2022-12-24 12:36:54', '[{\"_name\": \"\", \"_value\": \"\"}]', '[]'),
+(7, 'DELETED', 18, 'test', 'bebr', 1, '2022-12-26 01:06:06', '[{\"left\": \"\", \"name\": \"q\", \"right\": \"\", \"value\": \"w\"}]', '[\"https://sun9-56.userapi.com/impg/Qh-UM4Lp-UPpqo_Hgkl9G---EeAehifeqCCgvg/5J7PGGHmvJI.jpg?size=577x576&quality=95&sign=6269d96944f6c33f9e22fba79a4858da&type=album\"]'),
+(8, 'ACTIVE', 18, '1', '2', 0, '2022-12-26 04:45:01', '[{\"left\": \"3\", \"right\": \"4\"}, {\"left\": \"\", \"right\": \"\"}]', '[\"йцу\"]'),
+(9, 'DELETED', 18, 'abc', 'xxx', 0, '2022-12-26 06:19:38', '[{\"_name\": \"dd\", \"_value\": \"dd\"}]', '[\"f\"]'),
+(10, 'DELETED', 18, 'shsh', 'dd', 0, '2022-12-26 06:19:59', '[{\"left\": \"\", \"name\": \"m\", \"right\": \"\", \"value\": \"d\"}, {\"left\": \"\", \"name\": \"m\", \"right\": \"\", \"value\": \"d\"}]', '[]');
 
 -- --------------------------------------------------------
 
@@ -137,7 +142,8 @@ INSERT INTO `tokens` (`account_id`, `token`, `issued`) VALUES
 (18, 'ARjUQlV6hc13wLUaRUjBCvu7evEDas', '2022-12-23 14:10:53'),
 (32, 'hIOgkx4ijXc0F0RpSi5h6FJKI76UoU', '2022-12-23 16:50:33'),
 (18, 'vDyDLINZ3MCghSitKcB52LhY6kuaai', '2022-12-24 12:34:57'),
-(33, 'v56MOdesazTb2BujdSboxmnV8qrv9b', '2022-12-24 12:44:52');
+(33, 'v56MOdesazTb2BujdSboxmnV8qrv9b', '2022-12-24 12:44:52'),
+(18, 'kPgmAf8Sdu0XSKWbBzFO77fsizYPvy', '2022-12-26 06:18:05');
 
 --
 -- Индексы сохранённых таблиц
@@ -191,7 +197,7 @@ ALTER TABLE `accounts`
 -- AUTO_INCREMENT для таблицы `announcements`
 --
 ALTER TABLE `announcements`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц

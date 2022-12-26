@@ -112,15 +112,6 @@
     function isOkay(input : HTMLInputElement) : boolean {
         return !(input.value === null) && !(input.value === undefined) && (input.checkValidity());
     }
-    function updateInputsOkay() {        
-        var emailin = document.querySelector('#email') as HTMLInputElement;
-        var codein = document.querySelector('#emailcode') as HTMLInputElement;
-        var usernamein = document.querySelector('#username') as HTMLInputElement;
-        var passwordin = document.querySelector('#password') as HTMLInputElement;
-        var passwordrepeatin = document.querySelector('#password_repeat') as HTMLInputElement;
-        
-        inputsOkay.value = isOkay(emailin) && isOkay(codein) && isOkay(usernamein) && isOkay(passwordin) && passwordrepeatin.checkValidity();
-    }
 </script>
 <template>
     <div class="wrapper">

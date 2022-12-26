@@ -17,6 +17,7 @@
         }
         navigation.goProfile(id);
         closeWindow();
+        window.location.reload();
     }
 </script>
 <template>

@@ -22,7 +22,18 @@ import { post } from '@/assets/modules/ajax'
         return await post('/api/announcements/search.php', { query: query.toStringQuery() });
     }
     public async create(info : object) {
-        return await post('/api/announcements/create.php', info);
+        return await post('/api/announcements/add.php', info);
+    }
+    public async edit(id: number, info : any) {
+        var body = {
+            id,
+            title: info.title,
+            description: info.description,
+            price: info.price,
+            features: JSON.stringify( info.features ),
+            pics: JSON.stringify( info.pics ),
+        }
+        return await post('/api/announcements/edit.php', body);
     }
 }
 export default AnnouncementsModule.instance;

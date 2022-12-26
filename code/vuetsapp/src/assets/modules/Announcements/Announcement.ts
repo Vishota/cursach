@@ -11,7 +11,8 @@ class Announcement extends LazyObject {
         [ 'description', new LazyProperty<string>(async () => { return await api.getDescription(this._id) }) ],
         [ 'pics', new LazyProperty<string[]>( async () => { return await api.getPics(this._id) } ) ],
         [ 'price', new LazyProperty<string>( async () => { return await api.getPrice(this._id) } ) ],
-        [ 'owner', new LazyProperty<number>( async () => { return (await api.getOwner(this._id)) } ) ],
+        [ 'owner', new LazyProperty<number>( async () => { console.log('own', (await api.getOwner(this._id)));
+         return (await api.getOwner(this._id)) } ) ],
         [ 'features', new LazyProperty<AnnouncementFeature[]>( async () => { return await api.getFeatures(this._id); }) ]
     ]);
     

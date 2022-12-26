@@ -10,9 +10,6 @@
     var id : number = parseInt(useRoute().params.id as string);
     var announcement : Announcement = announcements.get(id);
     var announcementObject : any = ref(announcement.toObject());
-    console.log(announcementObject);
-
-    var editBlocked = ref(false);
 
     init();
 
@@ -22,6 +19,7 @@
     }
 
     async function save() {
+        loading.value = true;
         (announcementObject.value.features as AnnouncementFeature[]).forEach(
             (v,i)=>{
                 if(v.name == '' || v.value == '') (announcementObject.value.features as AnnouncementFeature[]).splice(i, 1)
@@ -30,7 +28,9 @@
             (v,i)=>{
                 if(v == '') (announcementObject.value.pics as string[]).splice(i, 1)
             });
-        console.log(announcementObject.value);
+        await announcements.edit(id, announcementObject.value);
+        loading.value = false;
+        
     }
 </script>
 <template>
@@ -46,7 +46,7 @@
                 <input class="in"  v-model="announcementObject.features[i - 1].name" placeholder="Характеристика" :disabled="loading">
                 <input class="in" v-model="announcementObject.features[i - 1].value" placeholder="Значение" :disabled="loading">
             </div>
-            <button class="add-feature butaccent" @click="announcementObject.features.push( {} )" :disabled="loading">+</button>
+            <button class="add-feature butaccent" @click="announcementObject.features.push( {left:'',right:''} )" :disabled="loading">+</button>
             <p>Для удаления оставьте поля пустыми</p>
         </div>
         <div class="vertflex block">
@@ -57,7 +57,10 @@
         </div>
         <div class="block horflex">
             <input class="in price" placeholder="Цена" v-model="announcementObject.price" :disabled="loading">
-            <button @click="save" class="create-button fullwidth butaccent" :disabled="editBlocked || loading">Сохранить</button>
+            <button @click="save" class="create-button fullwidth butaccent" :disabled="loading">Сохранить</button>
+        </div>
+        <div class="block horflex">
+            <button @click="save" class="create-button fullwidth butaccent" :disabled="loading">Удалить</button>
         </div>
     </div>
 </template>

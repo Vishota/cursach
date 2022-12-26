@@ -2,8 +2,8 @@
     import { openSignUpWindow } from '@/assets/authwindows';
     import accounts from '@/assets/modules/Accounts/AccountsModule';
     import { ref } from 'vue';
-    import router from '@/router';
     import { closeWindow } from '@/assets/authwindows';
+    import * as navigation from '@/assets/modules/navigation';
 
     var showWrongInput = ref(false);
     function setShowWrongInput(value: boolean) {
@@ -15,7 +15,7 @@
             showWrongInput.value = true;
             return;
         }
-        router.push('/profiles/'+id);
+        navigation.goProfile(id);
         closeWindow();
     }
 </script>

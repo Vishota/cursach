@@ -6,7 +6,7 @@
     import { useRoute } from 'vue-router';
     import GalleryComponent from '@/components/GalleryComponent.vue';
     import type AnnouncementFeature from '../assets/modules/Announcements/AnnouncementFeature';
-    import router from '@/router';
+    import * as navigation from '@/assets/modules/navigation';
 
     var id = ref(parseInt(useRoute().params.id as string));
     var announcement = reactive(announcements.get(id.value));
@@ -22,8 +22,8 @@
                 <div class="scrolledy">
                     <p class="userselect">{{announcement.get('description')}}</p>
                 </div>
-                <ProfileLink :id="announcement.get('owner')"/>
-                <button class="butregular" v-show="announcement.get('owner') == accounts.getMyId()" @click="router.push('/announcements/'+id+'/edit')">Редактировать</button>
+                <ProfileLink :id="announcement.get('owner')" :key="announcement.get('owner')"/>
+                <button class="butregular" v-show="announcement.get('owner') == accounts.getMyId()" @click="navigation.goAnnouncementEdit(id)">Редактировать</button>
                 <h3>{{announcement.get('price')}} BYN</h3>
             </div>
         </div>

@@ -3,7 +3,7 @@
     import { closeWindow } from '@/assets/authwindows';
     import profiles from '@/assets/modules/Accounts/AccountsModule'
     import { ref } from 'vue';
-    import router from '@/router/index';
+    import * as navigation from '@/assets/modules/navigation';
     
     // type of sign up
     var type = ref('');
@@ -92,7 +92,7 @@
             return;
         }
         
-        router.push('/profiles/'+signedUp.account);
+        navigation.goProfile(signedUp.account);
         closeWindow();
     }
     async function onEmailInput() {

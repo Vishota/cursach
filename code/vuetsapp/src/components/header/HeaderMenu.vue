@@ -2,7 +2,7 @@
     import { openSignInWindow, openSignUpWindow } from '@/assets/authwindows';
     import accounts from '@/assets/modules/Accounts/AccountsModule';
     import { ref } from 'vue';
-import ProfileLink from '../users/ProfileLink.vue';
+    import ProfileLink from '../users/ProfileLink.vue';
 
     var myid = ref( accounts.getMyId() );
 </script>

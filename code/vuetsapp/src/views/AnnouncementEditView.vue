@@ -68,6 +68,7 @@
             <h2>Изображения</h2>
             <input v-for="i in announcementObject.pics.length" class="in" v-model="announcementObject.pics[i - 1]" placeholder="Ссылка" :disabled="loading" >
             <button class="add-feature butaccent" @click="announcementObject.pics.push('');" :disabled="loading">+</button>
+            <p>Вы можете использовать <a class="hoveraccent pointer underline" href="https://imgur.com/upload">imgur</a></p>
             <p>Для удаления оставьте поле пустым</p>
         </div>
         <div class="block horflex">

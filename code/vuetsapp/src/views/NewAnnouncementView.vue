@@ -43,6 +43,7 @@
             <h2>Изображения</h2>
             <input v-for="i in picsCount" class="in" v-model="pics[i - 1]" placeholder="Ссылка">
             <div class="add-feature butaccent" @click="picsCount = Math.min(picsCount + 1, 10)">+</div>
+            <p>Вы можете использовать <a class="hoveraccent pointer underline" href="https://imgur.com/upload">imgur</a></p>
             <p>Если передумали, оставьте поле пустым</p>
         </div>
         <div class="block horflex">

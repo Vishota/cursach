@@ -1,5 +1,5 @@
 <?php
-    require_once __DIR__.'/../modules/technical_info/TechnicalInfoModule.php';
+    require_once __DIR__.'/../modules/TechnicalInfoModule.php';
     require_once __DIR__.'/../common/sender/email/EmailSMTPSender.php';
 
     final class CursachEmailSender extends EmailSMTPSender {

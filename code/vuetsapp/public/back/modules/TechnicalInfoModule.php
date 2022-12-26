@@ -1,5 +1,5 @@
 <?php
-    require_once __DIR__.'/../../common/singleton/SingletonTrait.php';
+    require_once __DIR__.'/../common/singleton/SingletonTrait.php';
 
     class TechnicalInfoModule {
         use SingletonTrait;

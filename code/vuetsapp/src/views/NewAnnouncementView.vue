@@ -1,6 +1,7 @@
 <script lang="ts" setup>
     import { ref } from 'vue';
     import announcements from '@/assets/modules/Announcements/AnnouncementsModule';
+import * as navigation from '@/assets/modules/navigation';
 
     var featuresCount = ref(0);
     var features = ref([] as Array<any>);
@@ -21,6 +22,7 @@
             'features': JSON.stringify(features.value),
             'pics': JSON.stringify(pics.value)
         });
+        navigation.goMain();
     }
 </script>
 <template>
@@ -47,7 +49,7 @@
             <p>Если передумали, оставьте поле пустым</p>
         </div>
         <div class="block horflex">
-            <input class="in price" placeholder="Цена" v-model="price">
+            <input class="in price" placeholder="Цена" v-model="price" type="number" min="0">
             <button @click="createAnnouncement" class="create-button fullwidth butaccent" :disabled="creationBlocked">Создать объявление</button>
         </div>
     </div>

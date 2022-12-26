@@ -72,7 +72,7 @@
             <p>Для удаления оставьте поле пустым</p>
         </div>
         <div class="block horflex">
-            <input class="in price" placeholder="Цена" v-model="announcementObject.price" :disabled="loading">
+            <input class="in price" placeholder="Цена" v-model="announcementObject.price" :disabled="loading" type="number" min="0">
             <button @click="save" class="create-button fullwidth butaccent" :disabled="loading">Сохранить</button>
         </div>
         <div class="block horflex">

@@ -2,16 +2,20 @@
     import profiles from '@/assets/modules/Profiles/ProfilesModule';
     import accounts from '@/assets/modules/Accounts/AccountsModule';
     import ProfileLink from '@/components/users/ProfileLink.vue';
-    import { ref, reactive } from 'vue';
+    import { ref, reactive, createApp } from 'vue';
     import { useRoute } from 'vue-router';
     import GalleryComponent from '@/components/GalleryComponent.vue';
     import AnnouncementsQuery from '@/assets/modules/Announcements/AnnouncementsQuery';
     import AnnouncementsList from '@/components/announcements/AnnouncementsList.vue';
     import * as navigation from '@/assets/modules/navigation';
+import type WindowComponent from '@/components/WindowComponent.vue';
 
     var id = ref(parseInt(useRoute().params.id as string));
     var user = reactive(profiles.get(id.value));
     var announcementsQuery = reactive( new AnnouncementsQuery().setOwner(id.value) );
+
+    var changePicShown = ref(false);
+    var pic = ref('');
 </script>
 <template>
     <div class="vertflex">
@@ -24,10 +28,10 @@
             </div>
             <div class="vertflex">
                 <div class="gallery-container">
-                    <GalleryComponent :pics="[ user.get('pic') ]" class="gallery" openable />
+                    <GalleryComponent :pics="[]" class="gallery" openable />
                 </div>
                 <button class="butaccent" v-if="accounts.getMyId() === id" @click="navigation.goNew()">Создать объявление</button>
-                <button class="butregular" v-if="accounts.getMyId() === id">Настройки</button>
+                <!--<button class="butregular" v-if="accounts.getMyId() === id" @click="onChangePictureClick">Изменить изображение профиля</button>-->
             </div>
         </div>
         <div class="block">

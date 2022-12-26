@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { reactive, ref } from 'vue';
+    import { ref } from 'vue';
     import { useRoute } from 'vue-router';
     import AnnouncementsList from '@/components/announcements/AnnouncementsList.vue';
     import AnnouncementsQuery from '@/assets/modules/Announcements/AnnouncementsQuery';

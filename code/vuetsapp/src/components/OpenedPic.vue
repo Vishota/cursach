@@ -16,6 +16,9 @@
     function close() {
         document.querySelector('#piccontainer')?.remove();
     }
+    function fullsize() {
+        window.open(props.pics[shownPic.value], '_blank')
+    }
 </script>
 <template>
     <div class="container" id="piccontainer">
@@ -23,6 +26,7 @@
         <div class="gridwrapper">
             <div class="close viewer-interface" @click="close">&#9932;</div>
             <img class="bigpic" :src="pic" v-for="(pic, i) in pics" v-show="shownPic == i">
+            <div class="original viewer-interface" @click="fullsize"></div>
             <div class="listwrapper viewer-interface">
                 <div class="list">
                     <img v-for="(pic, i) in pics" :src="pic" :n="i" @click="select">
@@ -73,6 +77,20 @@
     }
     .close:hover {
         color: var(--c-accent);
+    }
+    .original {
+        font-size: 20px;
+        grid-row-start: 1;
+        grid-column-start: 2;
+        grid-row-end: 2;
+        grid-column-end: 3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+    .original::after {
+        content: 'fullsize';
     }
     .listwrapper {
         display: flex;

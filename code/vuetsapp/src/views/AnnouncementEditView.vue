@@ -1,12 +1,12 @@
 <script setup lang="ts">
-    import { reactive, ref, createApp } from 'vue';
+    import { ref, createApp } from 'vue';
     import announcements from '@/assets/modules/Announcements/AnnouncementsModule';
     import { useRoute } from 'vue-router';
     import type Announcement from '../assets/modules/Announcements/Announcement';
     import type AnnouncementFeature from '@/assets/modules/Announcements/AnnouncementFeature';
-import * as navigation from '@/assets/modules/navigation';
-import ConfirmWindow from '@/components/ConfirmWindow.vue';
-import { closeWindow } from '../assets/authwindows';
+    import * as navigation from '@/assets/modules/navigation';
+    import ConfirmWindow from '@/components/ConfirmWindow.vue';
+    import { closeWindow } from '../assets/authwindows';
 
     var loading = ref(true);
 
@@ -75,7 +75,10 @@ import { closeWindow } from '../assets/authwindows';
             <button @click="save" class="create-button fullwidth butaccent" :disabled="loading">Сохранить</button>
         </div>
         <div class="block horflex">
-            <button @click="onDeleteClicked" class="create-button fullwidth butaccent" :disabled="loading">Удалить</button>
+            <button @click="navigation.goAnnouncement(id)" class="create-button fullwidth butaccent">Вернуться к объявлению</button>
+        </div>
+        <div class="block horflex">
+            <button @click="onDeleteClicked" class="create-button fullwidth butregular" :disabled="loading">Удалить</button>
         </div>
     </div>
 </template>

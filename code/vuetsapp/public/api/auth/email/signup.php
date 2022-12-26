@@ -1,7 +1,7 @@
 <?php
     $return = [];
     try {
-        require_once __DIR__.'/../../../back/modules/accounts/UsersModule.php';
+        require_once __DIR__.'/../../../back/modules/UsersModule.php';
         require_once __DIR__.'/../../../back/main/CursachEmailVerifier.php';
 
         // $_POST['email'] = 'vishotax3@gmail.com';

@@ -21,7 +21,7 @@
         }
         // method that transforms client query to database request
         private function queryToRequest(string $query) : array {
-            $conditions = [];
+            $conditions = ['status != "DELETED"'];
             $params = [];
             
             $text = self::getFromQuery($query, 'text', '[^\|]');

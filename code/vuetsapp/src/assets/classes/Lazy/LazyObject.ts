@@ -51,6 +51,9 @@ abstract class LazyObject {
             })
         return object;
     }
+    public forget() {
+        this._properties = new Map<string, LazyProperty<any>>;
+    }
 }
 
 class CannotInitPropertyError extends Error {

@@ -1,12 +1,12 @@
 <script lang="ts" setup>
     import { ref } from 'vue';
-    import { search } from '@/assets/modules/Announcements/search';
+import * as navigation from '@/assets/modules/navigation';
 
     function onHeaderSearch() {
-        search((document.querySelector('#headersearch') as HTMLInputElement).value);
+        navigation.goSearch((document.querySelector('#headersearch') as HTMLInputElement).value);
     }
     function goSearch() {
-        search('');
+        navigation.goSearch('');
     }
 
     var showSearchButton = ref(false);

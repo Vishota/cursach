@@ -35,5 +35,8 @@ import { post } from '@/assets/modules/ajax'
         }
         return await post('/api/announcements/edit.php', body);
     }
+    public async remove(id: number) {
+        return await post('/api/announcements/delete.php', {id});
+    }
 }
 export default AnnouncementsModule.instance;

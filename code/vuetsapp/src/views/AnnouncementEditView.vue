@@ -1,9 +1,12 @@
 <script setup lang="ts">
-    import { reactive, ref } from 'vue';
+    import { reactive, ref, createApp } from 'vue';
     import announcements from '@/assets/modules/Announcements/AnnouncementsModule';
     import { useRoute } from 'vue-router';
     import type Announcement from '../assets/modules/Announcements/Announcement';
     import type AnnouncementFeature from '@/assets/modules/Announcements/AnnouncementFeature';
+import * as navigation from '@/assets/modules/navigation';
+import ConfirmWindow from '@/components/ConfirmWindow.vue';
+import { closeWindow } from '../assets/authwindows';
 
     var loading = ref(true);
 
@@ -30,7 +33,19 @@
             });
         await announcements.edit(id, announcementObject.value);
         loading.value = false;
-        
+        navigation.goAnnouncement(id);
+    }
+    async function onDeleteClicked() {
+        const container = document.createElement('div');
+        document.body.insertAdjacentElement('afterbegin', container);
+        createApp(ConfirmWindow, {
+            onconfirm: async () => {
+                loading.value = true;
+                await announcements.remove(id);
+                navigation.goMain();
+                closeWindow();
+            }
+        }).mount(container);
     }
 </script>
 <template>
@@ -60,7 +75,7 @@
             <button @click="save" class="create-button fullwidth butaccent" :disabled="loading">Сохранить</button>
         </div>
         <div class="block horflex">
-            <button @click="save" class="create-button fullwidth butaccent" :disabled="loading">Удалить</button>
+            <button @click="onDeleteClicked" class="create-button fullwidth butaccent" :disabled="loading">Удалить</button>
         </div>
     </div>
 </template>

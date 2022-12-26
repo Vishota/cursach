@@ -15,7 +15,8 @@ import announcements from '@/assets/modules/Announcements/AnnouncementsModule';
                     <div class="close" @click="closeWindow">&#215;</div>
                 </div>
                 <div class="content">
-                    <span v-is="contentcomp" />
+                    <span v-if="contentcomp != undefined" v-is="contentcomp" />
+                    <slot />
                 </div>
             </div>
         </div>
